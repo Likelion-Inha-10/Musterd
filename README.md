@@ -35,7 +35,7 @@ type: commit message
    <tr>
       <td align="center"><a href="https://github.com/wlsdk9803"><img src="https://avatars.githubusercontent.com/u/103057334?v=4" width="100px;" alt=""/><br /><sub><b>wlsdk9803<br/>(Jina Park)</b></sub></a></td>
      <td align="center"><a href="https://github.com/eundeok9"><img src="https://avatars.githubusercontent.com/u/100702397?v=4" width="100px;" alt=""/><br /><sub><b>eundeok9<br/>(EunSeo Cho)</b></sub></a></td>
-      <td align="center"><a href="https://github.com/thesojungkim"><img src="https://avatars.githubusercontent.com/u/79556112?v=4" width="100px;" alt=""/><br /><sub><b>thesojungkim<br/>(SoJung Kim)</b></sub></a></td>
+      <td align="center"><a href="https://github.com/thesojungkim"><img src="https://avatars.githubusercontent.com/u/103019590?v=4" width="100px;" alt=""/><br /><sub><b>thesojungkim<br/>(SoJung Kim)</b></sub></a></td>
       <td align="center"><a href="https://github.com/dlwnsgus07"><img src="https://avatars.githubusercontent.com/u/37991960?v=4" width="100px;" alt=""/><br /><sub><b>dlwnsgus07<br/>(JunHyeon Lee)</b></sub></a></td>
      <td align="center"><a href="https://github.com/emotion615"><img src="https://avatars.githubusercontent.com/u/102964287?v=4" width="100px;" alt=""/><br /><sub><b>emotion615<br/>(SeoJung Park)</b></sub></a></td>
      <td align="center"><a href="https://github.com/soriSeong"><img src="https://avatars.githubusercontent.com/u/103102313?v=4" width="100px;" alt=""/><br /><sub><b>soriSeong<br/>(Seong Lee)</b></sub></a></td>
