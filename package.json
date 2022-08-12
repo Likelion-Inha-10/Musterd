@@ -24,6 +24,9 @@
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src"
   },
+  "prettier": {
+    "singleQuote": true
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

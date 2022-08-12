@@ -1,5 +1,5 @@
-import { DECREMENT, INCREMENT, RESET, TEST } from "./actions";
-import { combineReducers } from "redux";
+import { DECREMENT, INCREMENT, RESET, TEST } from './actions';
+import { combineReducers } from 'redux';
 
 const initialState = {
   step: 0,
