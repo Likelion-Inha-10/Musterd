@@ -1,4 +1,4 @@
-import { categoryPlans } from "./fakeResponse";
+import { categoryPlans } from './fakeResponse';
 
 export const getCategoryPlan = async () => {
   return categoryPlans;

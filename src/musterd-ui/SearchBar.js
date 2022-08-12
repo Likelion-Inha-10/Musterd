@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { BsSearch } from "react-icons/bs";
+import styled from 'styled-components';
+import { BsSearch } from 'react-icons/bs';
 const Wrapper = styled.div`
   display: flex;
 `;

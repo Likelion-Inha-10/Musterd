@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import SearchBar from "../../musterd-ui/SearchBar";
-import styled from "styled-components";
-import * as categoryPlanApi from "../../apis/categoryPlanApi";
-import * as friendListApi from "../../apis/friendListApi";
-import CategoryPlan from "./Component/CategoryPlan";
-import FriendProfile from "./Component/FriendProfile";
+import { useEffect, useState } from 'react';
+import SearchBar from '../../musterd-ui/SearchBar';
+import styled from 'styled-components';
+import * as categoryPlanApi from '../../apis/categoryPlanApi';
+import * as friendListApi from '../../apis/friendListApi';
+import CategoryPlan from './Component/CategoryPlan';
+import FriendProfile from './Component/FriendProfile';
 
 const Wrapper = styled.div``;
 
 const Search = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [isTyped, setIstTyped] = useState(false);
   const [planList, setPlanList] = useState([]);
   const [friendList, setFriendList] = useState([]);
@@ -29,7 +29,7 @@ const Search = () => {
 
   //검색창에 이름을 입력시 친구목록을 실시간으로 변경
   const onChange = (e) => {
-    if (e.target.value !== "") {
+    if (e.target.value !== '') {
       setIstTyped(true);
     } else {
       setIstTyped(false);
@@ -49,7 +49,7 @@ const Search = () => {
         value={searchValue}
         onChange={onChange}
         onSubmit={onSubmit}
-        placeHolder={"친구이름"}
+        placeHolder={'친구이름'}
       />
       {isTyped ? (
         <div>

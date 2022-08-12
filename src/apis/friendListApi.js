@@ -1,4 +1,4 @@
-import { friendList } from "./fakeResponse";
+import { friendList } from './fakeResponse';
 
 export const getFriendByName = async (friendName) => {
   let list = friendList.filter((friend) => friend.name.includes(friendName));
