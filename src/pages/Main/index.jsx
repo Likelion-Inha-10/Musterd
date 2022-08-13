@@ -1,3 +1,3 @@
-const Main = () => <>Main Page</>;
+const Main = () => <>Main Pageㅇ</>;
 
 export default Main;
