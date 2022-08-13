@@ -6,7 +6,7 @@ const Image = styled.img`
   width: 30px;
   height: 30px;
 `;
-const CategoryPlan = ({ category, place, writer, benefit, image }) => {
+const CategoryPlan = ({ id, category, place, writer, benefit, image }) => {
   return (
     <Wrapper>
       <Image src={image} />

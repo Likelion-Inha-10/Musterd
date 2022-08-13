@@ -6,7 +6,7 @@ const Image = styled.img`
   width: 30px;
   height: 30px;
 `;
-const FriendProfile = ({ name, image, information }) => {
+const FriendProfile = ({ id, name, image, information }) => {
   return (
     <Wrapper>
       <Image src={image} />
