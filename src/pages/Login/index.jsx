@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import { TextBox, Button, LoginWrapper, Input } from "../../musterd-ui/LoginSignupStyled";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import NavigationBar from "../../component/NavigationBar";
+import React, { useState } from 'react';
+import {
+  TextBox,
+  Button,
+  LoginWrapper,
+  Input,
+} from '../../musterd-ui/LoginSignupStyled';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
-  const [userEmail, setUserEmail] = useState("");
-  const [userPW, setUserPW] = useState("");
-  const [warning, setWarning] = useState("");
+  const [userEmail, setUserEmail] = useState('');
+  const [userPW, setUserPW] = useState('');
+  const [warning, setWarning] = useState('');
   const [isEmail, setIsEmail] = useState(false);
 
   const onChangeUserEmail = (e) => {
@@ -38,8 +42,8 @@ const Login = () => {
         })
         .catch((error) => {
           console.log(error);
-          alert("e-mail 혹은 비밀번호가 올바르지 않습니다.");
-          setWarning("※ e-mail 혹은 비밀번호가 올바르지 않습니다.");
+          alert('e-mail 혹은 비밀번호가 올바르지 않습니다.');
+          setWarning('※ e-mail 혹은 비밀번호가 올바르지 않습니다.');
         });
     }
   };
@@ -53,7 +57,7 @@ const Login = () => {
   이런 식으로 세로 중앙 배열 제거하고 높이 지정해주면 된다.*/
   return (
     <>
-      <style>{"body { background-color: #0404b4; }"}</style>
+      <style>{'body { background-color: #0404b4; }'}</style>
       <LoginWrapper>
         <TextBox
           fontSize="50px"
@@ -95,13 +99,13 @@ const Login = () => {
         <br />
         <Button
           backgroundColor={
-            isEmail && userPW.length >= 6 ? "#FACC2E" : "lightgray"
+            isEmail && userPW.length >= 6 ? '#FACC2E' : 'lightgray'
           }
           width="200px"
           height="30px"
           fontSize="14px"
           margin="20px"
-          cursor={isEmail && userPW.length >= 6 ? "pointer" : "default"}
+          cursor={isEmail && userPW.length >= 6 ? 'pointer' : 'default'}
           onClick={onLogin}
         >
           로그인
@@ -117,7 +121,6 @@ const Login = () => {
           회원가입하러 가기
         </TextBox>
       </LoginWrapper>
-      <NavigationBar />
     </>
   );
 };
