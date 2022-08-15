@@ -7,6 +7,7 @@ import { TextBox } from './LoginSignupStyled';
 
 const BarWrapping = styled.div`
   width: 100%;
+  max-width: 500px;
   position: fixed;
   bottom: 0;
   height: 35px;
