@@ -16,8 +16,7 @@ const Wrapper = styled.div`
 
 const Layout = styled.div`
   max-height: 844px;
-  min-width: 390px;
-  max-width: 390px;
+  width: 390px;
   background-color: white;
 `;
 
