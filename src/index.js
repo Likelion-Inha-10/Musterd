@@ -15,8 +15,11 @@ const Wrapper = styled.div`
 `;
 
 const Layout = styled.div`
-  max-height: 844px;
-  width: 390px;
+  height: 100vh;
+  min-height: 640px;
+  width: 100vh;
+  min-width: 375px;
+  max-width: 500px;
   background-color: white;
 `;
 
