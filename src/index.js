@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: gray;
 `;
 
 const Layout = styled.div`
@@ -20,7 +19,6 @@ const Layout = styled.div`
   width: 100vh;
   min-width: 320px;
   max-width: 500px;
-  background-color: white;
 `;
 
 const GlobalStyles = createGlobalStyle`
