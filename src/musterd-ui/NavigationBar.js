@@ -20,17 +20,17 @@ const BarWrapping = styled.div`
 //추후 다른 페이지 완성되면 수정 예정
 const NavigationBar = () => {
   const navigate = useNavigate();
-  const toTravel = () => {
-    navigate(`/signup`);
+  const toStamp = () => {
+    navigate(`/stamp`);
   };
   const toMypage = () => {
-    navigate(`/signup`);
+    navigate(`/mypage`);
   };
   const toSearch = () => {
     navigate(`/search`);
   };
-  const toRank = () => {
-    navigate(`/signup`);
+  const toRanking = () => {
+    navigate(`/ranking`);
   };
 
   //페이지가 길어질 때 페이지 내용이 네비게이션 바에 가려지는 문제 발생
@@ -38,7 +38,7 @@ const NavigationBar = () => {
   return (
     <>
       <BarWrapping>
-        <IoIosAirplane cursor="pointer" fontSize="30px" onClick={toTravel} />
+        <IoIosAirplane cursor="pointer" fontSize="30px" onClick={toStamp} />
         <TextBox
           cursor="pointer"
           fontSize="23px"
@@ -48,7 +48,7 @@ const NavigationBar = () => {
           MY
         </TextBox>
         <IoIosSearch cursor="pointer" fontSize="30px" onClick={toSearch} />
-        <RiVipCrown2Fill cursor="pointer" fontSize="27px" onClick={toRank} />
+        <RiVipCrown2Fill cursor="pointer" fontSize="27px" onClick={toRanking} />
       </BarWrapping>
     </>
   );
