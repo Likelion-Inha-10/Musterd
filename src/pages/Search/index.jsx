@@ -22,9 +22,14 @@ const Search = () => {
 
   //검색하는 사람의 이름이 변경될 때 마다 이름이 비슷한 사람들의 목록을 가져옴
   useEffect(() => {
-    friendListApi
-      .getFriendByName(searchValue)
-      .then((res) => setFriendList(res));
+    const timeId = setTimeout(() => {
+      friendListApi
+        .getFriendByName(searchValue)
+        .then((res) => setFriendList(res));
+    }, 300);
+    return () => {
+      clearTimeout(timeId);
+    };
   }, [searchValue]);
 
   //검색창에 이름을 입력시 친구목록을 실시간으로 변경
@@ -57,6 +62,7 @@ const Search = () => {
           {friendList.map((friend) => (
             <FriendProfile
               key={friend.id}
+              id={friend.id}
               image={friend.image}
               name={friend.name}
               information={friend.information}
@@ -67,14 +73,10 @@ const Search = () => {
         <div>
           여기는 사용자가 검색하지 않아서 카테고리별로 보여주는 모습
           {planList.map((plan) => (
-            <CategoryPlan
-              image={plan.image}
-              key={plan.id}
-              category={plan.category}
-              place={plan.place}
-              writer={plan.writer}
-              benefit={plan.benefit}
-            />
+            <div>
+              {plan.category}
+              <CategoryPlan planList={plan.plan_list} />
+            </div>
           ))}
         </div>
       )}
