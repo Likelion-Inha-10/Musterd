@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FriendRanking from './Component/FriendRanking';
+import NavigationBar from './../../musterd-ui/NavigationBar';
 
 const Ranking = () => {
   const [ranking, setRanking] = useState([
@@ -42,6 +43,7 @@ const Ranking = () => {
           point={friendRaking.point}
         />
       ))}
+      <NavigationBar />
     </div>
   );
 };
