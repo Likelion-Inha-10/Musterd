@@ -83,10 +83,10 @@ const SignUp = () => {
       password.length >= 6 &&
       password === checkPassword &&
       warningName === '' &&
-      univ === ''
+      univ
     ) {
       axios
-        .post(`api주소`, { email, password, checkPassword, name })
+        .post(`api주소`, { email, password, name, univ })
         .then(() => {
           //console.log(response);
           alert('회원가입이 완료 되었습니다.');
