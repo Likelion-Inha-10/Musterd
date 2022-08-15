@@ -27,7 +27,7 @@ const NavigationBar = () => {
     navigate(`/signup`);
   };
   const toSearch = () => {
-    navigate(`/signup`);
+    navigate(`/search`);
   };
   const toRank = () => {
     navigate(`/signup`);
