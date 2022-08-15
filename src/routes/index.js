@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../pages/Main';
 import Search from '../pages/Search';
 import Login from '../pages/Login';
+import SignUp from '../pages/SignUp';
 
 // 라우트명은 kebab-case 로 작성합니다
 
@@ -11,6 +12,7 @@ const Router = () => (
       <Route path="/" element={<Main />} />
       <Route path="/search" element={<Search />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
     </Routes>
   </BrowserRouter>
 );
