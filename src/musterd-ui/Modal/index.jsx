@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CompletePopUp from '../PopUpStyled/CompletePopUp';
+import PlacePopUp from './../PopUpStyled/PlacePopUp';
 
 const Overlay = styled.div`
   position: fixed;
@@ -21,16 +22,31 @@ const Modal = (props) => {
       <>
         <Overlay>
           <Wrapper>
-            <CompletePopUp>
+            <CompletePopUp
               PopModal={props.completeModal}
               setPopModal={props.setCompleteModal}
               content={props.content}
               isSignIn={props.isSignIn}
-            </CompletePopUp>
+            ></CompletePopUp>
           </Wrapper>
         </Overlay>
       </>
     );
 };
+
+if (props.type === 'PlacePopUp') {
+  return (
+    <>
+      <Overlay>
+        <Wrapper>
+          <PlacePopUp
+            PopModal={props.placeModal}
+            setPopModal={props.setPlaceModal}
+          ></PlacePopUp>
+        </Wrapper>
+      </Overlay>
+    </>
+  );
+}
 
 export default Modal;
