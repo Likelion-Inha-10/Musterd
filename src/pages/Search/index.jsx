@@ -73,15 +73,10 @@ const Search = () => {
         <div>
           여기는 사용자가 검색하지 않아서 카테고리별로 보여주는 모습
           {planList.map((plan) => (
-            <CategoryPlan
-              image={plan.image}
-              key={plan.id}
-              id={plan.id}
-              category={plan.category}
-              place={plan.place}
-              writer={plan.writer}
-              benefit={plan.benefit}
-            />
+            <div>
+              {plan.category}
+              <CategoryPlan planList={plan.plan_list} />
+            </div>
           ))}
         </div>
       )}
