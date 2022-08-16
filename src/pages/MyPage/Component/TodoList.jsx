@@ -76,23 +76,46 @@ const PlanTime = styled.div`
   font-size: 10px;
 `;
 
+
+
 const TodoList = ({ apiUrl }) => {
-  const [plan, setPlan] = useState([]); // 진행중인 플랜을 담는 배열
+  const [plans, setPlans] = useState([]); // 진행중인 플랜을 담는 배열
 
   useEffect(() => {
     axios.get(`${apiUrl}/mypage`).then((res) => {
-      setPlan(res.data[0]);
+      setPlans(res.data);
     });
   }, []);
 
+  const ChangeDone = (e) =>{
+     axios.post(`${apiUrl}/tdl/${e.target.isDone}`).then(() => {
+    window.location.reload(true);
+  });
+};
+
   return (
     <div>
-      {plan.map((plans) => {
+      {plans.map((plan) => {
+        
         return (
-          <PlanBox>
-            <PlanTime>{plan.promise_time}</PlanTime>
-            <PlanBody>{plan.title}</PlanBody>
-          </PlanBox>
+          <PlanContainer>
+            <PlanBox key={plan.id}>
+
+              { plan.isDone ? (
+                {/* isDone 이 true 이면 안 뜸 */}
+              ):(
+                <>{/* isDone 이 false 이면 뜸 */}
+                <CheckBox 
+                  id={plan.isDone}
+                  onClick={ChangeDone}
+                  />
+                  <PlanTime>{plan.promise_time}</PlanTime>
+                  <PlanBody>{plan.title}</PlanBody>
+                </>
+              )
+              }
+            </PlanBox>
+          </PlanContainer>
         );
       })}
     </div>
