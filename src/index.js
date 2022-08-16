@@ -11,16 +11,14 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: gray;
 `;
 
 const Layout = styled.div`
   height: 100vh;
   min-height: 640px;
   width: 100vh;
-  min-width: 375px;
+  min-width: 320px;
   max-width: 500px;
-  background-color: white;
 `;
 
 const GlobalStyles = createGlobalStyle`
