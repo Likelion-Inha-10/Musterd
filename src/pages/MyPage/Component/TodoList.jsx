@@ -1,29 +1,30 @@
 import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { 
-  BsChevronCompactLeft, 
-  BsChevronCompactRight, 
-  BsPlusSquare, 
+import {
+  BsChevronCompactLeft,
+  BsChevronCompactRight,
+  BsPlusSquare,
   BsDashSquare,
-  BsChevronDown, 
-  BsChevronUp 
-} from "react-icons/bs";
-import axios from 'axios';
+  BsChevronDown,
+  BsChevronUp,
+} from 'react-icons/bs';
+import { getPlan } from '../../../apis/planApi';
+import * as planApi from '../../../apis/planApi';
 
 // 전체 컨테이너
 const Container = styled.div`
   width: 375px;
   height: 812px;
 
-  background-color: #F7F6F2;
-  
+  background-color: #f7f6f2;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 
   /* hr .css */
   .tophr {
-    width:375px;
+    width: 375px;
     border: 1px solid black;
   }
 `;
@@ -45,11 +46,10 @@ const MusterdText = styled.div`
   font-size: 15px;
 
   margin: 14px 239px 15px 25px;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-
 `;
 
 // 프사
@@ -61,7 +61,7 @@ const ProfilePic = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
 
-  background-color: #F2C93F;
+  background-color: #f2c93f;
 `;
 
 // ******************************************Calendar***********************************************
@@ -74,7 +74,7 @@ const Calendar = styled.div`
   margin-top: 17px;
   margin-left: 272px;
 
-  background-color: #F2C93F;
+  background-color: #f2c93f;
 
   display: flex;
   justify-content: center;
@@ -105,7 +105,6 @@ const DateContainer = styled.div`
   display: flex;
   align-items: flex-end;
 `;
-
 
 // 연도
 const NowYear = styled.div`
@@ -147,10 +146,10 @@ const TodoButton = styled.div`
   width: 188px;
   height: 58px;
 
-  background-color: #F2C93F;
+  background-color: #f2c93f;
   border: 1px solid black;
   font-size: 15px;
-  font-weight: 900; 
+  font-weight: 900;
 
   display: flex;
   justify-content: center;
@@ -177,7 +176,7 @@ const DoneButton = styled.div`
 const PlusMinusContainer = styled.div`
   height: 24px;
 
-  margin-top:20px;
+  margin-top: 20px;
 
   display: flex;
 `;
@@ -203,7 +202,7 @@ const PlanContainer = styled.div`
 
 // 빈 체크박스
 const EmptyCheckBox = styled.div`
-  width:24px;
+  width: 24px;
   height: 24px;
 
   margin-right: 18px;
@@ -213,13 +212,13 @@ const EmptyCheckBox = styled.div`
 
 // 체크된 체크박스
 const FilledCheckBox = styled.div`
-  width:24px;
+  width: 24px;
   height: 24px;
 
   margin-right: 18px;
 
   border: 1px solid black;
-  background-color: #F2C93F;
+  background-color: #f2c93f;
 `;
 
 // 플랜 박스
@@ -241,7 +240,7 @@ const PlanTime = styled.div`
   font-size: 10px;
 `;
 
-// 플랜 내용 박스 
+// 플랜 내용 박스
 const PlanBody = styled.div`
   width: 150px;
   height: 20px;
@@ -260,21 +259,23 @@ const PlaceButton = styled.div`
   border: 1px solid black;
   margin-right: 14px;
 
-  background-color: #F3C93F;
+  background-color: #f3c93f;
   font-size: 15px;
   font-weight: 900px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
-
-
 
 const TodoList = () => {
   const [plans, setPlans] = useState([]); // 플랜을 담는 배열
-  
+  useEffect(() => {
+    planApi.getPlan().then((res) => {
+      setPlans(res);
+      console.log(res);
+    });
+  }, []);
 
   return (
     <Container>
@@ -283,50 +284,62 @@ const TodoList = () => {
         <MusterdText>Musterd</MusterdText>
         <ProfilePic />
       </TopBar>
-      <hr className='tophr'></hr>
+      <hr className="tophr"></hr>
       {/* 캘린더 버튼 */}
       <Calendar>
         <CalendarText>Calendar</CalendarText>
-        <BsChevronDown size='15'/>
-        </Calendar>
-
-      {plans.map((plan) => {
-      {/* 날짜 파트 */}
+        <BsChevronDown size="15" />
+      </Calendar>
       <DateBody>
         <DateContainer>
-          <BsChevronCompactLeft style={{fontSize:'30px'}} />
+          <BsChevronCompactLeft style={{ fontSize: '30px' }} />
           <NowYear>2022</NowYear>
           <NowDate>8.17</NowDate>
           <DayWeek>Wedsday</DayWeek>
-          <BsChevronCompactRight style={{fontSize:'30px'}} />
+          <BsChevronCompactRight style={{ fontSize: '30px' }} />
         </DateContainer>
       </DateBody>
-      {/* Todo & Done 버튼 */}
       <DoneContainer>
         <TodoButton>To Do</TodoButton>
         <DoneButton>Done</DoneButton>
       </DoneContainer>
-      {/* 플러스 마이너스 버튼  */}
+      ;{/* 플러스 마이너스 버튼  */}
       <PlusMinusContainer>
-        <BsPlusSquare style={{backgroundColor:' #F3C93F', marginLeft:'268px', marginRight:'33px'}} size='24' />
-        <BsDashSquare style={{backgroundColor:' #F3C93F', marginRight:'26px'}} size='24' />
+        <BsPlusSquare
+          style={{
+            backgroundColor: ' #F3C93F',
+            marginLeft: '268px',
+            marginRight: '33px',
+          }}
+          size="24"
+        />
+        <BsDashSquare
+          style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
+          size="24"
+        />
       </PlusMinusContainer>
-      {/* 플랜 파트 */}
-      <MainContainer>
-        {plan.isDone ? 
-          (
-          <PlanContainer key={plan.id}>
-          <EmptyCheckBox />
-          <PlanBox>
-            <PlanTime>10:00 PM</PlanTime>
-            <PlanBody>{plan.title}</PlanBody>
-            <PlaceButton>Place1</PlaceButton>
-          </PlanBox>
-          </PlanContainer>
-          ):('')
-        }
-      </MainContainer>
-      })}
+      {plans.map((plan) => (
+        <>
+          {/* 날짜 파트 */}
+          {/* Todo & Done 버튼 */}
+          {/* 플랜 파트 */}
+          <MainContainer>
+            {plan.isDone ? (
+              <PlanContainer key={plan.id}>
+                <EmptyCheckBox />
+                <PlanBox>
+                  <PlanTime>10:00 PM</PlanTime>
+                  <PlanBody>{plan.title}</PlanBody>
+                  <PlaceButton>Place1</PlaceButton>
+                </PlanBox>
+              </PlanContainer>
+            ) : (
+              ''
+            )}
+          </MainContainer>
+          ;
+        </>
+      ))}
     </Container>
   );
 };
