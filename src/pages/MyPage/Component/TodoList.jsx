@@ -261,7 +261,7 @@ const PlaceButton = styled.div`
 
   background-color: #f3c93f;
   font-size: 15px;
-  font-weight: 900px;
+  font-weight: bolder;
 
   display: flex;
   justify-content: center;
@@ -270,6 +270,15 @@ const PlaceButton = styled.div`
 
 const TodoList = () => {
   const [plans, setPlans] = useState([]); // 플랜을 담는 배열
+  const [clickToDo, setClickToDo] = useState(true);
+
+  const onClickIsToDo = (e) => {
+    setClickToDo(true);
+  };
+  const onClickIsDone = (e) => {
+    setClickToDo(false);
+  };
+
   useEffect(() => {
     planApi.getPlan().then((res) => {
       setPlans(res);
@@ -300,10 +309,10 @@ const TodoList = () => {
         </DateContainer>
       </DateBody>
       <DoneContainer>
-        <TodoButton>To Do</TodoButton>
-        <DoneButton>Done</DoneButton>
+        <TodoButton onClick={onClickIsToDo}>To Do</TodoButton>
+        <DoneButton onClick={onClickIsDone}>Done</DoneButton>
       </DoneContainer>
-      ;{/* 플러스 마이너스 버튼  */}
+      {/* 플러스 마이너스 버튼  */}
       <PlusMinusContainer>
         <BsPlusSquare
           style={{
@@ -318,28 +327,37 @@ const TodoList = () => {
           size="24"
         />
       </PlusMinusContainer>
-      {plans.map((plan) => (
-        <>
-          {/* 날짜 파트 */}
-          {/* Todo & Done 버튼 */}
-          {/* 플랜 파트 */}
-          <MainContainer>
-            {plan.isDone ? (
-              <PlanContainer key={plan.id}>
-                <EmptyCheckBox />
-                <PlanBox>
-                  <PlanTime>10:00 PM</PlanTime>
-                  <PlanBody>{plan.title}</PlanBody>
-                  <PlaceButton>Place1</PlaceButton>
-                </PlanBox>
-              </PlanContainer>
-            ) : (
-              ''
-            )}
-          </MainContainer>
-          ;
-        </>
-      ))}
+      <MainContainer>
+        {clickToDo
+          ? plans.map((plan) => (
+              <>
+                {!plan.isDone && (
+                  <PlanContainer key={plan.id}>
+                    <EmptyCheckBox />
+                    <PlanBox>
+                      <PlanTime>10:00 PM</PlanTime>
+                      <PlanBody>{plan.title}</PlanBody>
+                      <PlaceButton>Place1</PlaceButton>
+                    </PlanBox>
+                  </PlanContainer>
+                )}
+              </>
+            ))
+          : plans.map((plan) => (
+              <>
+                {plan.isDone && (
+                  <PlanContainer key={plan.id}>
+                    <EmptyCheckBox />
+                    <PlanBox>
+                      <PlanTime>10:00 PM</PlanTime>
+                      <PlanBody>{plan.title}</PlanBody>
+                      <PlaceButton>Place1</PlaceButton>
+                    </PlanBox>
+                  </PlanContainer>
+                )}
+              </>
+            ))}
+      </MainContainer>
     </Container>
   );
 };
