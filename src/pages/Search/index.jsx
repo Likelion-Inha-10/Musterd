@@ -5,9 +5,15 @@ import * as categoryPlanApi from '../../apis/categoryPlanApi';
 import * as friendListApi from '../../apis/friendListApi';
 import CategoryPlan from './Component/CategoryPlan';
 import FriendProfile from './Component/FriendProfile';
+import NavigationBar from '../../musterd-ui/NavigationBar';
 
-const Wrapper = styled.div``;
-
+const Wrapper = styled.div`
+  background-color: ${(props) => props.theme.colors.basic};
+  height: 100%;
+`;
+const InfoWrapper = styled.div`
+  margin: 2.8125rem;
+`;
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isTyped, setIstTyped] = useState(false);
@@ -49,38 +55,42 @@ const Search = () => {
   };
 
   return (
-    <Wrapper>
-      <SearchBar
-        value={searchValue}
-        onChange={onChange}
-        onSubmit={onSubmit}
-        placeHolder={'친구이름'}
-      />
-      {isTyped ? (
-        <div>
-          이쪽은 사용자가 검색을 했을때 친구 목록을 보여주는 모습
-          {friendList.map((friend) => (
-            <FriendProfile
-              key={friend.id}
-              id={friend.id}
-              image={friend.image}
-              name={friend.name}
-              information={friend.information}
-            />
-          ))}
-        </div>
-      ) : (
-        <div>
-          여기는 사용자가 검색하지 않아서 카테고리별로 보여주는 모습
-          {planList.map((plan) => (
-            <div>
-              {plan.category}
-              <CategoryPlan planList={plan.plan_list} />
-            </div>
-          ))}
-        </div>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <SearchBar
+          value={searchValue}
+          onChange={onChange}
+          onSubmit={onSubmit}
+          placeHolder={'Search here'}
+        />
+        <InfoWrapper>
+          {isTyped ? (
+            <>
+              {friendList.map((friend) => (
+                <FriendProfile
+                  key={friend.id}
+                  id={friend.id}
+                  image={friend.image}
+                  name={friend.name}
+                  point={friend.point}
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              여기는 사용자가 검색하지 않아서 카테고리별로 보여주는 모습
+              {planList.map((plan) => (
+                <>
+                  {plan.category}
+                  <CategoryPlan planList={plan.plan_list} />
+                </>
+              ))}
+            </>
+          )}
+        </InfoWrapper>
+        <NavigationBar />
+      </Wrapper>
+    </>
   );
 };
 
