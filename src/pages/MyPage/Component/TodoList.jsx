@@ -13,8 +13,8 @@ import * as planApi from '../../../apis/planApi';
 
 // 전체 컨테이너
 const Container = styled.div`
-  width: 375px;
-  height: 812px;
+  min-width: 375px;
+  min-height: 812px;
 
   background-color: #f7f6f2;
 
@@ -24,7 +24,7 @@ const Container = styled.div`
 
   /* hr .css */
   .tophr {
-    width: 375px;
+    min-width: 375px;
     border: 1px solid black;
   }
 `;
