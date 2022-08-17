@@ -320,7 +320,7 @@ const TodoList = () => {
           <PlanBox>
             <PlanTime>10:00 PM</PlanTime>
             <PlanBody>{plan.title}</PlanBody>
-            <PlaceButton>Place</PlaceButton>
+            <PlaceButton>Place1</PlaceButton>
           </PlanBox>
           </PlanContainer>
           ):('')
