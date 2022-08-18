@@ -10,10 +10,64 @@ import NavigationBar from '../../musterd-ui/NavigationBar';
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.basic};
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
-const InfoWrapper = styled.div`
+const SelectWrapper = styled.div`
+  margin-top: 0.78125rem;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: flex-end;
+  margin-bottom: 1.4375rem;
+`;
+const Select = styled.select`
+  text-align: center;
+  height: 1.75rem;
+  width: 6.375rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  &:focus {
+    border-color: red;
+  }
+`;
+const FriendWrapper = styled.div`
   margin: 2.8125rem;
 `;
+const CategoryWrapper = styled.div`
+  font-size: 18px;
+  font-weight: 900;
+  margin-left: 1.53125rem;
+  margin-bottom: 0.625rem;
+`;
+
+const OPTIONS = [
+  { value: 'all', name: 'Category' },
+  { value: 'cafe', name: 'Cafe' },
+  { value: 'eat', name: '식사' },
+  { value: 'sports', name: '스포츠' },
+  { value: 'hobby', name: '취미' },
+  { value: 'study', name: '스터디' },
+];
+
+const SelectBox = (props) => {
+  return (
+    <Select>
+      {props.options.map((option) => (
+        <option
+          value={option.value}
+          defaultValue={props.defaultValue === option.value}
+        >
+          {option.name}
+        </option>
+      ))}
+    </Select>
+  );
+};
+
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isTyped, setIstTyped] = useState(false);
@@ -63,31 +117,31 @@ const Search = () => {
           onSubmit={onSubmit}
           placeHolder={'Search here'}
         />
-        <InfoWrapper>
-          {isTyped ? (
-            <>
-              {friendList.map((friend) => (
-                <FriendProfile
-                  key={friend.id}
-                  id={friend.id}
-                  image={friend.image}
-                  name={friend.name}
-                  point={friend.point}
-                />
-              ))}
-            </>
-          ) : (
-            <>
-              여기는 사용자가 검색하지 않아서 카테고리별로 보여주는 모습
-              {planList.map((plan) => (
-                <>
-                  {plan.category}
-                  <CategoryPlan planList={plan.plan_list} />
-                </>
-              ))}
-            </>
-          )}
-        </InfoWrapper>
+        {isTyped ? (
+          <FriendWrapper>
+            {friendList.map((friend) => (
+              <FriendProfile
+                key={friend.id}
+                id={friend.id}
+                image={friend.image}
+                name={friend.name}
+                point={friend.point}
+              />
+            ))}
+          </FriendWrapper>
+        ) : (
+          <>
+            <SelectWrapper>
+              <SelectBox options={OPTIONS} />
+            </SelectWrapper>
+            {planList.map((plan) => (
+              <>
+                <CategoryWrapper>#{plan.category}</CategoryWrapper>
+                <CategoryPlan planList={plan.plan_list} />
+              </>
+            ))}
+          </>
+        )}
         <NavigationBar />
       </Wrapper>
     </>
