@@ -30,11 +30,14 @@ const Input = styled.input`
   padding-left: 1rem;
   border: none;
   ::placeholder {
+    font-family: 'Roboto Slab', serif;
     letter-spacing: 1.05px;
+    color: black;
   }
   letter-spacing: 3px;
   font-weight: 900;
   background: none;
+  font-size: 15px;
 `;
 
 const SearchBar = ({ value, onChange, onSubmit, placeHolder }) => {
