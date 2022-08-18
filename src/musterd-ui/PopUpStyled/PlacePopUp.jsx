@@ -76,6 +76,7 @@ const PlacePopUp = () => {
   };
 
   const onChangeTime = (e) => {
+    console.log(e.target.value);
     setTime(e.target.value);
   };
 
