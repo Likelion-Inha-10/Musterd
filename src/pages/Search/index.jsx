@@ -7,6 +7,9 @@ import CategoryPlan from './Component/CategoryPlan';
 import FriendProfile from './Component/FriendProfile';
 import NavigationBar from '../../musterd-ui/NavigationBar';
 
+const Nav = styled.div`
+  height: 8.5%;
+`;
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.basic};
   height: 100%;
@@ -30,6 +33,16 @@ const Select = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+
   &:focus {
     border-color: red;
   }
@@ -136,14 +149,16 @@ const Search = () => {
             </SelectWrapper>
             {planList.map((plan) => (
               <>
-                <CategoryWrapper>#{plan.category}</CategoryWrapper>
+                <CategoryWrapper># {plan.category}</CategoryWrapper>
                 <CategoryPlan planList={plan.plan_list} />
               </>
             ))}
+            <Nav>s</Nav>
           </>
         )}
-        <NavigationBar />
       </Wrapper>
+      <Nav />
+      <NavigationBar />
     </>
   );
 };
