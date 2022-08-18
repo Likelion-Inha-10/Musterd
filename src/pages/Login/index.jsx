@@ -7,12 +7,14 @@ import {
 } from '../../musterd-ui/LoginSignupStyled';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Modal from '../../musterd-ui/Modal';
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPW, setUserPW] = useState('');
   const [warning, setWarning] = useState('');
   const [isEmail, setIsEmail] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
 
   const onChangeUserEmail = (e) => {
     //console.log(e.target.value);
@@ -33,18 +35,19 @@ const Login = () => {
   //로그인 버튼 눌렀을 때
   const onLogin = () => {
     if (isEmail && userPW.length >= 6) {
-      axios
-        .post(`api주소`, { userEmail, userPW })
-        .then((response) => {
-          console.log(response);
-          navigate(`/`);
-          //navigate(`/${response.data.id}`);
-        })
-        .catch((error) => {
-          console.log(error);
-          alert('e-mail 혹은 비밀번호가 올바르지 않습니다.');
-          setWarning('※ e-mail 혹은 비밀번호가 올바르지 않습니다.');
-        });
+      // axios
+      //   .post(`api주소`, { userEmail, userPW })
+      //   .then((response) => {
+      //     console.log(response);
+      //     navigate(`/`);
+      //     //navigate(`/${response.data.id}`);
+      setIsPopup(!isPopup);
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      //   alert('e-mail 혹은 비밀번호가 올바르지 않습니다.');
+      //   setWarning('※ e-mail 혹은 비밀번호가 올바르지 않습니다.');
+      // });
     }
   };
 
@@ -57,6 +60,18 @@ const Login = () => {
   이런 식으로 세로 중앙 배열 제거하고 높이 지정해주면 된다.*/
   return (
     <>
+      {isPopup ? (
+        <Modal
+          completeModal={isPopup}
+          setCompleteModal={setIsPopup}
+          content="로그인이 완료되었습니다!"
+          subcontent="MyPage로 넘어갑니다"
+          type="completePopUp"
+          isSignIn="true"
+        />
+      ) : (
+        <></>
+      )}
       <style>{'body { background-color: #0404b4; }'}</style>
       <LoginWrapper>
         <TextBox

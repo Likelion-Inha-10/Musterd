@@ -8,6 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 //import styled from "styled-components";
 import axios from 'axios';
+import Modal from '../../musterd-ui/Modal';
 
 /*const IDwarning = styled.div`
   width: 200px;
@@ -32,6 +33,7 @@ const SignUp = () => {
   const [warningEmail, setWarningEmail] = useState('');
   const [warningPW, setWarningPW] = useState('');
   const [warningCheckPW, setWarningCheckPW] = useState('');
+  const [isPopup, setIsPopup] = useState(false);
 
   const onChange = (e) => {
     const { value, name } = e.target; //e.target에서 name과 value를 추출
@@ -85,16 +87,17 @@ const SignUp = () => {
       warningName === '' &&
       univ
     ) {
-      axios
-        .post(`api주소`, { email, password, name, univ })
-        .then(() => {
-          //console.log(response);
-          alert('회원가입이 완료 되었습니다.');
-          navigate('/login');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      setIsPopup(!isPopup);
+      // axios
+      //   .post(`api주소`, { email, password, name, univ })
+      //   .then(() => {
+      //     //console.log(response);
+      //     alert('회원가입이 완료 되었습니다.');
+      //     navigate('/login');
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     }
   };
 
@@ -104,6 +107,17 @@ const SignUp = () => {
 
   return (
     <>
+      {isPopup ? (
+        <Modal
+          completeModal={isPopup}
+          setCompleteModal={setIsPopup}
+          content="축하합니다! "
+          subcontent="가입이 완료되셨습니다!"
+          type="completePopUp"
+        />
+      ) : (
+        <></>
+      )}
       <style>{'body { background-color: #0404b4;}'}</style>
       <LoginWrapper width="90%">
         <TextBox

@@ -41,14 +41,14 @@ const TextWrapper = styled.div`
     props.borderbottom ? props.borderbottom : '1px solid'};
 `;
 const Button = styled.div`
-  width: 203px;
+  width: 102px;
   height: 19px;
   border: 1.1px solid #000000;
   background-color: #f3c93f;
   text-align: center;
   font-size: 12px;
   padding-top: 2px;
-  margin: 8px 0px 10px 10px;
+  margin: 8px 0px 10px 7px;
   cursor: pointer;
 
   :hover {
@@ -66,7 +66,7 @@ const Image = styled.img`
   margin-right: 10px;
   margin-top: ${(props) => (props.margintop ? props.margintop : 'none')};
 `;
-const PlacePopUp = () => {
+const JoinPopUp = () => {
   const navigate = useNavigate();
   const [list, setList] = useState('');
   const [time, setTime] = useState('');
@@ -123,6 +123,7 @@ const PlacePopUp = () => {
           <p>인원수</p>
         </TextWrapper>
         <ButtonWrapper>
+          <Button>Cancel</Button>
           <Button>Add</Button>
         </ButtonWrapper>
       </Container>
@@ -130,6 +131,6 @@ const PlacePopUp = () => {
   );
 };
 
-export default PlacePopUp;
+export default JoinPopUp;
 
 /*적용해야하는 것: 창 종료버튼 onClick, 카테고리 onClick, 검색 onClick*/

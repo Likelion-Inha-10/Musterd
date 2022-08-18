@@ -5,51 +5,50 @@ import { useNavigate } from 'react-router-dom';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: white;
-  width: 300px;
-  height: 150px;
-  border-radius: 16px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background: #f7f6f2;
+  border: 1.1px solid #000000;
+  width: 220px;
+  height: 130px;
+  margin: 2px 2px 2px 2px;
 `;
 
 const TextBox = styled.div`
   font-size: 15px;
-  color: white;
+  color: black;
   font-weight: bold;
   text-align: center;
-  margin-top: 40px;
+  margin-top: ${(props) => (props.margintop ? props.margintop : '10px')};
 `;
 
 const Button = styled.div`
-  background-color: navy;
-  color: yellow;
-  border-radius: 16px;
-  width: 100px;
-  height: 30px;
-  margin: 30px 100px 0px 100px;
-  padding-top: 3px;
-  cursor: pointer;
+  width: 180px;
+  height: 20px;
+  border: 1.1px solid #000000;
+  background-color: #f3c93f;
   text-align: center;
-  font-size: 18px;
-  font-weight: 300;
+  font-size: 12px;
+  padding-top: 2px;
+  margin: 25px 0px 0px 15px;
+  cursor: pointer;
 
   :hover {
-    background-color: grey;
+    background-color: #00000084;
   }
 `;
 //회원가입->로그인으로 갈때
 const CompletePopUp = (props) => {
   const navigate = useNavigate();
   const onButtonClick1 = () => {
-    navigate('/login');
+    navigate('/mypage');
   };
   const onButtonClick2 = () => {
-    navigate('/');
+    navigate('/login');
   };
   return (
     <>
       <Container>
-        <TextBox>{props.content}</TextBox>
+        <TextBox margintop="30px">{props.content}</TextBox>
+        <TextBox>{props.subcontent}</TextBox>
         {props.isSignIn ? (
           <Button onClick={onButtonClick1}>확인 </Button>
         ) : (
