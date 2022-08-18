@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MdKeyboardBackspace } from 'react-icons/md';
 
 const StyledHeader = styled.div`
   height: 60px;
@@ -19,6 +20,7 @@ const Typography = styled.h1`
 const Header = () => {
   return (
     <StyledHeader>
+      <MdKeyboardBackspace />
       <Typography>Musterd</Typography>
     </StyledHeader>
   );
