@@ -4,7 +4,7 @@ import { QrReader } from 'react-qr-reader';
 import styled from 'styled-components';
 import NavigationBar from '../../musterd-ui/NavigationBar';
 import PageInfo from './Component/PageInfo';
-import Header from './Component/Header';
+import Header from '../../musterd-ui/Header';
 import mission from '../../assets/img/mission.png';
 
 const CameraContainer = styled.div`
@@ -45,7 +45,7 @@ const QrCamera = (props) => {
 
   return (
     <>
-      <Header />
+      <Header back />
       <TypoWrapper src={mission} />
       <CameraContainer>
         <QrReader
