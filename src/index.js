@@ -44,8 +44,6 @@ const GlobalStyles = createGlobalStyle`
       //src: url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap');
       font-style: normal;
     }
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif','Roboto Slab', serif !important;
     outline: none;
   }
 `;
