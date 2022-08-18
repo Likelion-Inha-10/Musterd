@@ -10,7 +10,6 @@ export const request = (method, url, data) => {
     withCredentials: true,
   })
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => console.log(err));

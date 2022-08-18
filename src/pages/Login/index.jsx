@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TextBox,
   Button,
@@ -8,7 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from '../../musterd-ui/Modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/actions';
 import { Cookies } from 'react-cookie';
 const cookies = new Cookies();
@@ -26,7 +26,13 @@ const Login = () => {
   const [isEmail, setIsEmail] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const dispatch = useDispatch();
-
+  const auth = useSelector((state) => state.login);
+  //
+  useEffect(() => {
+    if (auth.auth_token !== '') {
+      onLogin();
+    }
+  }, [auth]);
   const onChangeUserEmail = (e) => {
     //console.log(e.target.value);
     setUserEmail(e.target.value);
@@ -72,17 +78,7 @@ const Login = () => {
       password: userPW,
     };
     e.preventDefault();
-    dispatch(login(body)).then((res) => {
-      console.log(res);
-      if (res.auth_token) {
-        console.log(res.auth_token);
-        setCookies('token', res.auth_token);
-        axios.defaults.headers.common[
-          'AUTHORIZATION'
-        ] = `Bearer ${res.auth_token}`;
-      }
-      onLogin();
-    });
+    dispatch(login(body));
   };
   /*페이지가 긴 경우 네비게이션 바 사용하려면
   <LoginWrapper top="0" transform="translate(-50%, 0)" height="750px">

@@ -1,12 +1,30 @@
 import { combineReducers } from 'redux';
 import { FAILURE, LOGIN_USER, SUCCESS } from './types';
+import axios from 'axios';
+import { setCookies } from '../pages/Login';
 
-const initialState = {};
+const initialState = {
+  id: 0,
+  name: '',
+  profile_image: '',
+  auth_token: '',
+};
 
 const login = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER:
-      return { ...state, loginSuccess: action.payload };
+    case 'LOGIN_USER_FULFILLED':
+      console.log(action.payload.auth_token);
+      setCookies('token', action.payload.auth_token);
+      axios.defaults.headers.common[
+        'AUTHORIZATION'
+      ] = `Bearer ${action.payload.auth_token}`;
+      return {
+        ...state,
+        name: action.payload.name,
+        id: action.payload.id,
+        auth_token: action.payload.auth_token,
+        profile_image: action.payload.profile_image,
+      };
     case FAILURE:
       if (state.step > 0) {
         return { ...state, step: state.step - 1 };
