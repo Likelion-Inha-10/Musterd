@@ -4,7 +4,6 @@ import FriendRanking from './Component/FriendRanking';
 import NavigationBar from './../../musterd-ui/NavigationBar';
 import Header from '../../musterd-ui/Header';
 import RankInfo from './Component/RankInfo';
-import AddPopUp from '../../musterd-ui/AddPopUp';
 import { useNavigate } from 'react-router-dom';
 
 const RankingWrapper = styled.div`
@@ -121,7 +120,6 @@ const Ranking = () => {
           />
         ))}
       </RankingWrapper>
-      <AddPopUp />
       <Margin height="40px" />
       <NavigationBar pageNumber="4" />
     </div>
