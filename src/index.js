@@ -31,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
   
   * {
     box-sizing: border-box;
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif','Roboto Slab', serif !important;
+    font-family: 'Roboto Slab', serif, 'Noto Sans KR', 'Spoqa Han Sans Neo', sans-serif, !important;
     outline: none;
   }
 `;
