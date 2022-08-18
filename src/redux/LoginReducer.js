@@ -1,35 +1,20 @@
-import { DECREMENT, INCREMENT, RESET, TEST } from './actions';
 import { combineReducers } from 'redux';
+import { FAILURE, LOGIN_USER, SUCCESS } from './types';
 
-const initialState = {
-  step: 0,
-};
+const initialState = {};
 
-const counter = (state = initialState, action) => {
+const login = (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT:
-      if (state.step < 8) {
-        return { ...state, step: state.step + 1 };
-      } else return state;
-    case DECREMENT:
+    case LOGIN_USER:
+      return { ...state, loginSuccess: action.payload };
+    case FAILURE:
       if (state.step > 0) {
         return { ...state, step: state.step - 1 };
       } else return state;
-    case TEST:
-      if (state.step < 8) {
-        return {
-          ...state,
-          step: state.step + 1,
-        };
-      } else return state;
-    case RESET:
-      return {
-        step: 1,
-      };
     default:
       return state;
   }
 };
 
-const counterReducer = combineReducers({ counter });
-export default counterReducer;
+const loginReducer = combineReducers({ login });
+export default loginReducer;
