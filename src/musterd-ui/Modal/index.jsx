@@ -5,6 +5,7 @@ import AddPopUp from './../PopUpStyled/AddPopUp';
 import JoinPopUp from './../PopUpStyled/JoinPopUp';
 import MyProfilePopUp from './../PopUpStyled/MyProfilePopUp';
 import PlacePopUp from './../PopUpStyled/PlacePopUp';
+import StampPopUp from './../PopUpStyled/StampPopUp';
 
 const Overlay = styled.div`
   position: relative;
@@ -37,21 +38,71 @@ const Modal = (props) => {
         </Overlay>
       </>
     );
+  if (props.type === 'addPopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <AddPopUp
+              PopModal={props.addModal}
+              setPopModal={props.setAddModal}
+            ></AddPopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'joinPopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <JoinPopUp
+              PopModal={props.joinModal}
+              setPopModal={props.setJoinModal}
+            ></JoinPopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'myprofilePopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <MyProfilePopUp
+              PopModal={props.profileModal}
+              setPopModal={props.setProfileModal}
+            ></MyProfilePopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'placePopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <PlacePopUp
+              PopModal={props.placeModal}
+              setPopModal={props.setPlaceModal}
+            ></PlacePopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'stampPopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <StampPopUp
+              PopModal={props.stampModal}
+              setPopModal={props.setStampModal}
+            ></StampPopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
 };
-
-// if (props.type === 'PlacePopUp') {
-//   return (
-//     <>
-//       <Overlay>
-//         <Wrapper>
-//           <PlacePopUp
-//             PopModal={props.placeModal}
-//             setPopModal={props.setPlaceModal}
-//           ></PlacePopUp>
-//         </Wrapper>
-//       </Overlay>
-//     </>
-//   );
-// }
 
 export default Modal;
