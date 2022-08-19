@@ -4,7 +4,7 @@ import Header from '../../../../musterd-ui/Header';
 import NavigationBar from '../../../../musterd-ui/NavigationBar';
 
 const Box = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 750px;
   background-color: #e3bdb7;
   display: flex;

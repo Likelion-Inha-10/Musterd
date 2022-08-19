@@ -28,7 +28,6 @@ const Router = () => (
       <Route path="/popup" element={<AddPopUp />} />
       <Route path="/stamp" element={<Stamp />} />
       <Route path="/stamp/likelion" element={<LikeLion />} />
-      <Route path="/stamp/likelion-complete" element={<Performance />} />
       <Route path="/stamp/harvard" element={<Harvardcomplete />} />
       <Route path="/stamp/inha" element={<InhaUni />} />
     </Routes>
