@@ -16,7 +16,7 @@ const Text = styled.div`
 `;
 
 const Underline = styled.hr`
-  width: 100vw;
+  width: 100%;
   margin-top: 5px;
   border: 1px solid #000000;
 `;

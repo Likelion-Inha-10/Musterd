@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import SearchBar from '../../musterd-ui/SearchBar';
 import styled from 'styled-components';
 import * as categoryPlanApi from '../../apis/categoryPlanApi';
@@ -16,6 +16,25 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const CategoryBtn = styled.select`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100px;
+  background-color: ${(props) => props.backgroundColor || '#efc63e'};
+  border-top: ${(props) => (props.borderTop ? props.borderTop : 'none')};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : 'none')};
+  border-right: ${(props) => (props.borderRight ? props.borderRight : 'none')};
+  border-bottom: ${(props) =>
+    props.borderBottom ? props.borderBottom : 'none'};
+  -webkit-scrollbar {
+    display: none;
+  }
+  size: ${(props) => props.size};
+  cursor: pointer;
+`;
+
 const SelectWrapper = styled.div`
   margin-top: 0.78125rem;
   display: flex;
@@ -47,6 +66,22 @@ const Select = styled.select`
     border-color: red;
   }
 `;
+const Option = styled.option`
+  background-color: ${(props) => props.backgroundColor};
+  position: absolute;
+  width: 100px;
+  height: 24px;
+  border-top: 1px solid black;
+  border-left: ${(props) => props.borderLeft || '1px solid black'};
+  border-right: ${(props) => props.borderRight || 'none'};
+  border-bottom: ${(props) => props.borderBottom || 'none'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${(props) => props.marginTop};
+  cursor: pointer;
+`;
+
 const FriendWrapper = styled.div`
   margin: 2.8125rem;
 `;
@@ -57,35 +92,85 @@ const CategoryWrapper = styled.div`
   margin-bottom: 0.625rem;
 `;
 
-const OPTIONS = [
-  { value: 'all', name: 'Category' },
-  { value: 'cafe', name: 'Cafe' },
-  { value: 'eat', name: '식사' },
-  { value: 'sports', name: '스포츠' },
-  { value: 'hobby', name: '취미' },
-  { value: 'study', name: '스터디' },
-];
-
-const SelectBox = (props) => {
-  return (
-    <Select>
-      {props.options.map((option) => (
-        <option
-          value={option.value}
-          defaultValue={props.defaultValue === option.value}
-        >
-          {option.name}
-        </option>
-      ))}
-    </Select>
-  );
-};
-
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isTyped, setIstTyped] = useState(false);
   const [planList, setPlanList] = useState([]);
   const [friendList, setFriendList] = useState([]);
+  const [category, setCategory] = useState('Category'); //카테고리 설정
+  const [buttonColor, setButtonColor] = useState('#efc63e'); //카테고리 배경색
+  const [isCategoryName, setIsCategoryName] = useState(true);
+
+  /*category 설정 부분*/
+  const CategoryMenu = () => {
+    if (isCategoryName) {
+      return (
+        <CategoryBtn
+          borderTop="1px solid black"
+          borderLeft="1px solid black"
+          backgroundColor={buttonColor}
+          onClick={ViewMenu}
+        >
+          <option>{category}</option>
+        </CategoryBtn>
+      );
+    } else {
+      return (
+        <CategoryBtn size="6">
+          <Option
+            value="Cafe"
+            backgroundColor="#EF7373"
+            onClick={ToCafe}
+            borderLeft="1px solid black"
+          >
+            Cafe
+          </Option>
+          <Option
+            value="Eat"
+            backgroundColor="#E5B342"
+            onClick={ToEat}
+            marginTop="24px"
+          >
+            Eat
+          </Option>
+          <Option
+            value="Sports"
+            backgroundColor="#EBF061"
+            onClick={ToSport}
+            marginTop="48px"
+          >
+            Sports
+          </Option>
+          <Option
+            value="Hobby"
+            backgroundColor="#6AE5A2"
+            onClick={ToHobby}
+            marginTop="72px"
+          >
+            Hobby
+          </Option>
+          <Option
+            value="Study"
+            backgroundColor="#7594EA"
+            onClick={ToStudy}
+            marginTop="96px"
+          >
+            Study
+          </Option>
+          <Option
+            value="Daily"
+            backgroundColor="#B475EA"
+            onClick={ToDaily}
+            marginTop="120px"
+            borderBottom="1px solid black"
+          >
+            Daily
+          </Option>
+        </CategoryBtn>
+      );
+    }
+  };
+
   // planList 가져오기
   useEffect(() => {
     categoryPlanApi.getCategoryPlan().then((res) => {
@@ -120,6 +205,40 @@ const Search = () => {
     console.log(searchValue);
     //api 통신 부분
   };
+  const ToCafe = () => {
+    setCategory('Cafe');
+    setButtonColor('#EF7373');
+    setIsCategoryName(true);
+  };
+  const ToEat = () => {
+    setCategory('Eat');
+    setButtonColor('#E5B342');
+    setIsCategoryName(true);
+  };
+  const ToSport = () => {
+    setCategory('Sports');
+    setButtonColor('#EBF061');
+    setIsCategoryName(true);
+  };
+  const ToHobby = () => {
+    setCategory('Hobby');
+    setButtonColor('#6AE5A2');
+    setIsCategoryName(true);
+  };
+  const ToStudy = () => {
+    setCategory('Study');
+    setButtonColor('#7594EA');
+    setIsCategoryName(true);
+  };
+  const ToDaily = () => {
+    setCategory('Daily');
+    setButtonColor('#B475EA');
+    setIsCategoryName(true);
+  };
+  const ViewMenu = () => {
+    setIsCategoryName(false);
+  };
+  /*category 설정 부분*/
 
   return (
     <>
@@ -145,7 +264,7 @@ const Search = () => {
         ) : (
           <>
             <SelectWrapper>
-              <SelectBox options={OPTIONS} />
+              <CategoryMenu />
             </SelectWrapper>
             {planList.map((plan) => (
               <>

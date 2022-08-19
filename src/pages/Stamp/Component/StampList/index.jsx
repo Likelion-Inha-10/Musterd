@@ -4,7 +4,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 const AllWrapper = styled.div`
-  height: 100vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@ const Box = styled.div`
   border: 1px solid #000000;
   width: 283px;
   height: 71px;
-  margin-bottom: 15vw;
+  margin-bottom: 15%;
 `;
 
 const UniText = styled.div`

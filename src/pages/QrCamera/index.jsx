@@ -30,7 +30,7 @@ const QrCamera = (props) => {
 
   // api 연동할 부분 (스캔 됐는지 여부를 true/false로 보냄)
   // useEffect = (() => {
-  //   axios.post(`${apiUrl}/travel-stamp/qr`, { qr_data: data }).then(() => {
+  //   axios.post(`${apiUrl}/travel-stamp`, { qr_data: data }).then(() => {
   //     console.log('성공');
   //   })}
   // ,[isScan]);
