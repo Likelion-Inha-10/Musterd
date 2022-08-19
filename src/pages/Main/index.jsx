@@ -117,7 +117,7 @@ const Main = () => {
         <EmptyCheckBox />
         <PlanBox onClick={moveToSign}>
           <PlanTime>Now</PlanTime>
-          <PlanBody>Sing Up</PlanBody>
+          <PlanBody>Sign Up</PlanBody>
           <PlaceButton src={LionImg}></PlaceButton>
         </PlanBox>
       </PlanContainer>
