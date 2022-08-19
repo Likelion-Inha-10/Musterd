@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import QrCamera from '../pages/QrCamera';
 import MyPage from '../pages/MyPage/MyPage';
+import AddPopUp from '../musterd-ui/PopUpStyled/AddPopUp';
 
 // 라우트명은 kebab-case 로 작성합니다
 
@@ -19,6 +20,7 @@ const Router = () => (
       <Route path="/signup" element={<SignUp />} />
       <Route path="/scan" element={<QrCamera />} />
       <Route path="mypage" element={<MyPage />} />
+      <Route path="/popup" element={<AddPopUp />} />
     </Routes>
   </BrowserRouter>
 );

@@ -4,8 +4,10 @@ import reset from 'styled-reset';
 import reportWebVitals from './reportWebVitals';
 import Router from './routes';
 import ReactDOMClient from 'react-dom/client';
+import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import theme from './assets/theme';
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -32,6 +34,7 @@ const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: 'Roboto Slab', serif, 'Noto Sans KR', 'Spoqa Han Sans Neo', sans-serif, !important;
+
     outline: none;
   }
 `;
@@ -39,14 +42,16 @@ const GlobalStyles = createGlobalStyle`
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <GlobalStyles />
-      <Wrapper>
-        <Layout>
-          <Router />
-        </Layout>
-      </Wrapper>
-    </React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <React.StrictMode>
+        <GlobalStyles />
+        <Wrapper>
+          <Layout>
+            <Router />
+          </Layout>
+        </Wrapper>
+      </React.StrictMode>
+    </ThemeProvider>
   </Provider>
 );
 
