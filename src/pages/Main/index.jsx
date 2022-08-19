@@ -8,16 +8,12 @@ const PlanContainer = styled.div`
   width: 333px;
   height: 49px;
 
-  margin-bottom: 30px;
-
   display: flex;
   align-items: center;
-
-  position: absolute;
-  top: ${(props) => props.top || '100px'};
-
+  position: sticky;
   margin-left: 50px;
-  margin-top: 80vw;
+  margin-top: 40px;
+  margin-bottom: 50px;
 `;
 
 const EmptyCheckBox = styled.div`
@@ -28,6 +24,10 @@ const EmptyCheckBox = styled.div`
 
   border: 1.1px solid black;
   background-color: #f2c93f;
+
+  box-shadow: 0px 0px 15px #00000029;
+
+  opacity: 1;
 `;
 
 const PlanBox = styled.div`
@@ -39,22 +39,21 @@ const PlanBox = styled.div`
 
   display: flex;
   align-items: center;
-  box-shadow: 0px 0px 6px #00000029;
+  box-shadow: 0px 0px 15px #00000029;
 
   opacity: 1;
 `;
 
 const PlanBody = styled.div`
-  width: ${(props) => props.width || '150px'};
+  width: ${(props) => props.width || '120px'};
   height: 20px;
 
   font-size: 18px;
   font-family: 'Roboto Slab', serif;
   font-weight: 900;
 
-  display: block;
-
-  margin-left: ${(props) => props.marginLeft || '50px'};
+  margin-left: ${(props) => props.marginLeft || '20px'};
+  margin-right: 10px;
 `;
 
 const PlaceButton = styled.img`
@@ -63,16 +62,30 @@ const PlaceButton = styled.img`
   z-index: 1;
 `;
 
+const PlanTime = styled.div`
+  width: 30px;
+  height: 15px;
+
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+
+  margin-left: 20px;
+
+  font-size: 10px;
+
+  display: flex;
+  align-items: center;
+`;
+
 const LikeLionText = styled.div`
-  padding-right: 10px;
   color: #f3c93f;
-  font-size: 30px;
+  font-size: 40px;
   font-family: 'Roboto Slab', serif;
   font-weight: 900;
-  margin-top: 205px;
-  margin-bottom: 25px;
   -webkit-text-stroke: 1.5px black;
   display: flex;
+  margin-top: 200px;
+  margin-bottom: 250px;
   justify-content: center;
 `;
 
@@ -92,7 +105,8 @@ const Main = () => {
       <PlanContainer>
         <EmptyCheckBox />
         <PlanBox onClick={moveToLogin}>
-          <PlanBody width="140px" marginLeft="60px">
+          <PlanTime>Now</PlanTime>
+          <PlanBody marginLeft="30px" width="110px">
             Login
           </PlanBody>
           <PlaceButton src={LikeImg}></PlaceButton>
@@ -102,7 +116,8 @@ const Main = () => {
       <PlanContainer top="200px">
         <EmptyCheckBox />
         <PlanBox onClick={moveToSign}>
-          <PlanBody>Sing Up</PlanBody>
+          <PlanTime>Now</PlanTime>
+          <PlanBody>Sign Up</PlanBody>
           <PlaceButton src={LionImg}></PlaceButton>
         </PlanBox>
       </PlanContainer>
