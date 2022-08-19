@@ -91,7 +91,7 @@ const SignUp = () => {
       univ
     ) {
       axios
-        .post(`http://139.162.67.184:8000/account/signup`, {
+        .post('account/signup', {
           email: email,
           password: password,
           username: name,
