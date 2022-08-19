@@ -66,7 +66,7 @@ const Image = styled.img`
   margin-right: 10px;
   margin-top: ${(props) => (props.margintop ? props.margintop : 'none')};
 `;
-const PlacePopUp = () => {
+const PlacePopUp = (props) => {
   const navigate = useNavigate();
   const [list, setList] = useState('');
   const [time, setTime] = useState('');
@@ -80,6 +80,9 @@ const PlacePopUp = () => {
     setTime(e.target.value);
   };
 
+  const onExitClick = () => {
+    props.setPopModal(!props.PopModal);
+  };
   return (
     <>
       <Container>
@@ -124,7 +127,7 @@ const PlacePopUp = () => {
           <p>인원수</p>
         </TextWrapper>
         <ButtonWrapper>
-          <Button>Add</Button>
+          <Button onClick={onExitClick}>Add</Button>
         </ButtonWrapper>
       </Container>
     </>

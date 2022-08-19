@@ -5,15 +5,17 @@ import AddPopUp from './../PopUpStyled/AddPopUp';
 import JoinPopUp from './../PopUpStyled/JoinPopUp';
 import MyProfilePopUp from './../PopUpStyled/MyProfilePopUp';
 import PlacePopUp from './../PopUpStyled/PlacePopUp';
+import StampPopUp from './../PopUpStyled/StampPopUp';
 
 const Overlay = styled.div`
-  position: relative;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
+  width: 24.5%;
   height: 100%;
-  z-index: 1;
+  z-index: 10000;
 `;
 const Wrapper = styled.div`
+  position: absolute;
   height: 100%;
   width: 100%;
   display: flex;
@@ -37,21 +39,71 @@ const Modal = (props) => {
         </Overlay>
       </>
     );
+  if (props.type === 'addPopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <AddPopUp
+              PopModal={props.addModal}
+              setPopModal={props.setAddModal}
+            ></AddPopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'joinPopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <JoinPopUp
+              PopModal={props.joinModal}
+              setPopModal={props.setJoinModal}
+            ></JoinPopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'myprofilePopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <MyProfilePopUp
+              PopModal={props.profileModal}
+              setPopModal={props.setProfileModal}
+            ></MyProfilePopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'placePopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <PlacePopUp
+              PopModal={props.placeModal}
+              setPopModal={props.setPlaceModal}
+            ></PlacePopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
+  if (props.type === 'stampPopUp')
+    return (
+      <>
+        <Overlay>
+          <Wrapper>
+            <StampPopUp
+              PopModal={props.stampModal}
+              setPopModal={props.setStampModal}
+            ></StampPopUp>
+          </Wrapper>
+        </Overlay>
+      </>
+    );
 };
-
-// if (props.type === 'PlacePopUp') {
-//   return (
-//     <>
-//       <Overlay>
-//         <Wrapper>
-//           <PlacePopUp
-//             PopModal={props.placeModal}
-//             setPopModal={props.setPlaceModal}
-//           ></PlacePopUp>
-//         </Wrapper>
-//       </Overlay>
-//     </>
-//   );
-// }
 
 export default Modal;

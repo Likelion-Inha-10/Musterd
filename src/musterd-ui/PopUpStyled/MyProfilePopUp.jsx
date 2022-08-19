@@ -49,12 +49,15 @@ const TextBox = styled.div`
   text-align: center;
   padding-top: 3px;
 `;
-const MyProfilePopUp = () => {
+const MyProfilePopUp = (props) => {
+  const onExitClick = () => {
+    props.setPopModal(!props.PopModal);
+  };
   return (
     <>
       <Container>
         <Box>
-          <VscClose size="23px" />
+          <VscClose size="23px" onClick={onExitClick} />
         </Box>
         <Wrapper>
           <Profile />
