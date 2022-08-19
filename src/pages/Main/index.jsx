@@ -1,18 +1,8 @@
 import styled from 'styled-components';
-import BackImg from '../Main/landing.png';
 import React from 'react';
 import LikeImg from '../Main/landing_like.png';
 import LionImg from '../Main/landing_lion.png';
 import { useNavigate } from 'react-router-dom';
-
-const ImageBox = styled.div`
-  width: 100vw;
-`;
-
-const Image = styled.img`
-  width: 100vw;
-  height: 896px;
-`;
 
 const PlanContainer = styled.div`
   width: 333px;
@@ -64,11 +54,6 @@ const PlanBody = styled.div`
 
   display: block;
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  z-index: 1;
-
   margin-left: ${(props) => props.marginLeft || '50px'};
 `;
 
@@ -76,6 +61,19 @@ const PlaceButton = styled.img`
   width: 56px;
   height: 24px;
   z-index: 1;
+`;
+
+const LikeLionText = styled.div`
+  padding-right: 10px;
+  color: #f3c93f;
+  font-size: 30px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
+  margin-top: 205px;
+  margin-bottom: 25px;
+  -webkit-text-stroke: 1.5px black;
+  display: flex;
+  justify-content: center;
 `;
 
 const Main = () => {
@@ -90,10 +88,7 @@ const Main = () => {
   };
   return (
     <div>
-      <ImageBox>
-        <Image src={BackImg}></Image>
-      </ImageBox>
-
+      <LikeLionText>Musterd</LikeLionText>
       <PlanContainer>
         <EmptyCheckBox />
         <PlanBox onClick={moveToLogin}>

@@ -1,7 +1,8 @@
-import React from 'react';
+import { React, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
+import Modal from './Modal/index';
 
 //헤더 컴포넌트 사용법
 //뒤로가기 필요한 페이지: <Header src="" />
@@ -40,25 +41,42 @@ const ProfileIcon = styled.img`
 
 const Header = (props) => {
   const navigate = useNavigate();
+  const [profilePopup, setProfilePopup] = useState(false);
+
+  const onClickProfile = () => {
+    setProfilePopup(!profilePopup);
+  };
+
   const onBackClick = () => {
     navigate(-1);
   };
 
   return (
-    <StyledHeader>
-      {props.back ? (
-        <BackWrapper>
-          <MdKeyboardArrowLeft onClick={onBackClick} size="20" />{' '}
-          <Typography>Musterd</Typography>
-        </BackWrapper>
+    <>
+      {profilePopup ? (
+        <Modal
+          profileModal={profilePopup}
+          setProfileModal={setProfilePopup}
+          type="myprofilePopUp"
+        />
       ) : (
-        <BackWrapper>
-          <Typography>Musterd</Typography>
-        </BackWrapper>
+        <></>
       )}
+      <StyledHeader>
+        {props.back ? (
+          <BackWrapper>
+            <MdKeyboardArrowLeft onClick={onBackClick} size="20" />{' '}
+            <Typography>Musterd</Typography>
+          </BackWrapper>
+        ) : (
+          <BackWrapper>
+            <Typography>Musterd</Typography>
+          </BackWrapper>
+        )}
 
-      <ProfileIcon src={props.src} />
-    </StyledHeader>
+        <ProfileIcon src={props.src} onClick={onClickProfile} />
+      </StyledHeader>
+    </>
   );
 };
 

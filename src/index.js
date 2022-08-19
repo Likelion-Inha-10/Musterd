@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
+  background-color: #f7f6f2;
 `;
 
 const Layout = styled.div`
