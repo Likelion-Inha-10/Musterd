@@ -298,9 +298,7 @@ const WhiteButton = styled.div`
 // 플러스 마이너스 버튼 컨테이너
 const PlusMinusContainer = styled.div`
   height: 24px;
-
   margin-top: 20px;
-
   display: flex;
 `;
 
@@ -308,8 +306,7 @@ const PlusMinusContainer = styled.div`
 
 // 전체적인 플랜박스들을 담는 컨테이너
 const MainContainer = styled.div`
-  height: 350px;
-
+  height: 52vh;
   display: flex;
   flex-direction: column;
 

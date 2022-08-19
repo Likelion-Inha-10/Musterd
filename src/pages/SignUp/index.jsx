@@ -280,7 +280,7 @@ const SignUp = () => {
           Sign Up
         </Button>
         <br />
-        <TextBox
+        <TextKorean
           fontSize="13px"
           color="#7C7C7C"
           display="inline"
@@ -288,15 +288,15 @@ const SignUp = () => {
           padding="0 13px 0 0"
         >
           Do you have an account already ?
-        </TextBox>
-        <TextBox
+        </TextKorean>
+        <TextKorean
           fontSize="14px"
           display="inline"
           cursor="pointer"
           onClick={toLogin}
         >
           Login
-        </TextBox>
+        </TextKorean>
       </LoginWrapper>
     </>
   );

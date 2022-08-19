@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  //font-family: 'Roboto Slab', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   cursor: ${(props) => props.cursor || 'pointer'};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -64,6 +64,7 @@ export const TitleWrapper = styled.div`
 `;
 
 export const Input = styled.input`
+  font-family: 'Noto Sans KR', sans-serif;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   font-size: ${(props) => props.fontSize};

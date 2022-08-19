@@ -90,6 +90,7 @@ const Main = () => {
   };
   return (
     <div>
+      <style>{'body { background-color: #F7F6F2; }'}</style>
       <ImageBox>
         <Image src={BackImg}></Image>
       </ImageBox>
@@ -116,3 +117,4 @@ const Main = () => {
 };
 
 export default Main;
+
