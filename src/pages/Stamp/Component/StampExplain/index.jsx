@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 23px;
+  height: 100px;
 `;
 const Box = styled.div`
   width: 40px;
@@ -17,10 +18,11 @@ const Box = styled.div`
 
 const Text = styled.div`
   font-size: 30px;
-  font-family: 'Roboto Slab', 800;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
   display: flex;
   justify-content: center;
-  margin-top: 6px;
+  margin-top: 3px;
 `;
 
 const Explain = () => {

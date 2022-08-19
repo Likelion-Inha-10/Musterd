@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import stampimg from '../StampPage/image/hackathon.png';
 import { BsFillCameraFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import NavigationBar from '../../../../musterd-ui/NavigationBar';
+import Header from '../../../../musterd-ui/Header';
 
 const AlltWrapper = styled.div`
   width: 100vw;
-  height: 654px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   z-index: 1;
   align-items: center;
+  margin-top: 20px;
   justify-content: center;
 `;
 
@@ -47,22 +50,23 @@ const TitleWrapper = styled.div`
 
 const LikeLionText = styled.div`
   padding-right: 10px;
-  color: #d98e00;
+  color: ${(props) => props.fontColor || '#d98e00'};
   font-size: 30px;
-  font-family: 'Roboto Slab', 800;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
   margin-top: 25px;
   margin-bottom: 25px;
-  text-shadow: 0px 0px 1px black;
+  -webkit-text-stroke: 1.5px black;
 `;
 const Text = styled.div`
   display: flex;
   font-size: ${(props) => props.fontSize || '30px'};
-  font-family: 'Noto Sans KR', 200;
+  font-family: 'NotoSansKR';
+  font-weight: 400;
   justify-content: center;
   margin-top: 25px;
   margin-bottom: 25px;
   text-align: center;
-  text-shadow: ;
   line-height: 30px;
 `;
 
@@ -88,6 +92,7 @@ const LikeLion = () => {
 
   return (
     <div>
+      <Header src="/stamp" back />
       <AlltWrapper>
         <ImageBox>
           <Image src={stampimg}></Image>
@@ -96,7 +101,7 @@ const LikeLion = () => {
         <TextWrapper>
           <TitleWrapper>
             <LikeLionText>Like Lion</LikeLionText>
-            <Text>Mission</Text>
+            <LikeLionText fontColor="black">Mission</LikeLionText>
           </TitleWrapper>
 
           <Underline width="284px" />
@@ -111,6 +116,7 @@ const LikeLion = () => {
       <QrButton>
         <BsFillCameraFill onClick={moveToScan} size="25px" />
       </QrButton>
+      <NavigationBar pageNumber="3" />
     </div>
   );
 };
