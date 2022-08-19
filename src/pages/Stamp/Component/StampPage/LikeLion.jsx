@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Performance from '../Performance';
 import NavigationBar from '../../../../musterd-ui/NavigationBar';
+import Header from '../../../../musterd-ui/Header';
 import BeforeScan from '../Performance/BeforeScan';
 import axios from 'axios';
 
