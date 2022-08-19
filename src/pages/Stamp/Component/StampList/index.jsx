@@ -4,11 +4,12 @@ import { FiChevronRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 const AllWrapper = styled.div`
-  height: 150vw;
+  height: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -24,7 +25,8 @@ const Box = styled.div`
 const UniText = styled.div`
   display: flex;
   font-size: 26px;
-  font-family: 'Roboto Slab', 800;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 800;
   justify-content: center;
   margin-top: 20px;
 `;
@@ -40,6 +42,10 @@ const StampList = () => {
 
   const moveToLikeLion = () => {
     navigate('/stamp/likelion');
+  };
+
+  const moveToInha = () => {
+    navigate('/stamp/inha');
   };
 
   const moveToHarvard = () => {
@@ -59,16 +65,16 @@ const StampList = () => {
 
         <Wrapper>
           <Box backgroundColor="#7BB6FA">
-            <UniText>INHA UNIN</UniText>
+            <UniText>INHA UNIV</UniText>
           </Box>
-          <PageButton backgroundColor="#B2D6FF">
+          <PageButton onClick={moveToInha} backgroundColor="#B2D6FF">
             <FiChevronRight size="30px" />
           </PageButton>
         </Wrapper>
 
         <Wrapper>
           <Box backgroundColor="#B43328">
-            <UniText>HARVARD UNIN</UniText>
+            <UniText>HARVARD UNIV</UniText>
           </Box>
           <PageButton onClick={moveToHarvard} backgroundColor="#D97C74">
             <FiChevronRight size="30px" />

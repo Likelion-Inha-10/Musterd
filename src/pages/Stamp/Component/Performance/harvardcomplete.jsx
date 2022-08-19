@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from '../../../../musterd-ui/Header';
+import NavigationBar from '../../../../musterd-ui/NavigationBar';
 
 const Box = styled.div`
   width: 100vw;
-  height: 654px;
+  height: 750px;
   background-color: #e3bdb7;
-  border: 1.1px solid #000000;
-  border-left: none;
-  border-right: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,8 +16,9 @@ const Box = styled.div`
 const LikeLionText = styled.div`
   color: #c91414;
   font-size: 30px;
-  font-family: 'Roboto Slab', 800;
-  text-shadow: 0px 0px 1px black;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
+  -webkit-text-stroke: 1.5px black;
 `;
 
 const Text = styled.div`
@@ -35,10 +35,12 @@ const Text = styled.div`
 const Harvardcomplete = () => {
   return (
     <div>
+      <Header back />
       <Box>
         <LikeLionText>HARVARD UNIV</LikeLionText>
         <Text>서비스 준비중입니다!</Text>
       </Box>
+      <NavigationBar pageNumber="3" />
     </div>
   );
 };

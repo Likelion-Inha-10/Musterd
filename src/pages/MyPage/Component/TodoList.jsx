@@ -414,7 +414,6 @@ const TodoList = () => {
       ) : (
         <></>
       )}
-
       <Container>
         {/* TopBar */}
         <TopBar>

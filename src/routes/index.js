@@ -11,6 +11,7 @@ import LikeLion from '../pages/Stamp/Component/StampPage/LikeLion';
 import Performance from '../pages/Stamp/Component/Performance/index';
 import Harvardcomplete from '../pages/Stamp/Component/Performance/harvardcomplete';
 import StampPopUp from '../musterd-ui/PopUpStyled/StampPopUp';
+import InhaUni from '../pages/Stamp/Component/StampPage/InhaUni';
 
 // 라우트명은 kebab-case 로 작성합니다
 
@@ -29,6 +30,7 @@ const Router = () => (
       <Route path="/stamp/likelion" element={<LikeLion />} />
       <Route path="/stamp/likelion-complete" element={<Performance />} />
       <Route path="/stamp/harvard" element={<Harvardcomplete />} />
+      <Route path="/stamp/inha" element={<InhaUni />} />
     </Routes>
   </BrowserRouter>
 );
