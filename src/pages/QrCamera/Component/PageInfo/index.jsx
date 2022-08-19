@@ -19,10 +19,11 @@ const Line = styled.div`
   margin: auto;
 `;
 const Typography = styled.div`
+  font-family: 'NotoSansKR';
   font-size: ${(props) => (props.fontSize ? props.fontSize : '15px')};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 'regular')};
   color: ${(props) => (props.fontColor ? props.fontColor : 'black')};
-  line-height: 1.2;
+  line-height: 1.5;
   margin-bottom: ${(props) =>
     props.marginbottom ? props.marginbottom : 'none'};
 `;
@@ -32,16 +33,16 @@ const PageInfo = () => {
     <>
       <Line />
       <TypoContainer>
-        <Typography fontSize="20px" fontWeight="bold" marginbottom="5px">
+        <Typography fontSize="18px" fontWeight="300" marginbottom="5px">
           인하대학교 Musterd팀을 찾아오시면
         </Typography>
-        <Typography fontSize="20px" fontWeight="bold" marginbottom="5px">
+        <Typography fontSize="18px" fontWeight="300" marginbottom="5px">
           QR코드를 제공해 드립니다!
         </Typography>
-        <Typography fontSize="20px" fontWeight="bold" marginbottom="5px">
+        <Typography fontSize="18px" fontWeight="300" marginbottom="5px">
           저희를 찾아와 QR을 인식하시고
         </Typography>
-        <Typography fontSize="20px" fontWeight="bold">
+        <Typography fontSize="18px" fontWeight="300">
           LikeLion 스탬프를 받아보세요!
         </Typography>
       </TypoContainer>

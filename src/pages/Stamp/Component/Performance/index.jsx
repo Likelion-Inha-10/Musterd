@@ -5,7 +5,7 @@ import NavigationBar from '../../../../musterd-ui/NavigationBar';
 import stampimg from '../StampPage/image/hackathon.png';
 
 const TextWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -44,8 +44,8 @@ const ImageBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  margin-top: 15vw;
+  width: 100%;
+  margin-top: 15%;
 `;
 
 const Image = styled.img`
