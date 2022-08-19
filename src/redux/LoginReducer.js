@@ -16,7 +16,7 @@ const login = (state = initialState, action) => {
       console.log(action.payload.auth_token);
       setCookies('token', action.payload.auth_token);
       axios.defaults.headers.common[
-        'AUTHORIZATION'
+        'Authorization'
       ] = `Bearer ${action.payload.auth_token}`;
       return {
         ...state,
