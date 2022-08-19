@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import {
   TextBox,
+  TextKorean,
   Button,
   LoginWrapper,
   Input,
+  TitleWrapper,
 } from '../../musterd-ui/LoginSignupStyled';
 import { useNavigate } from 'react-router-dom';
-//import styled from "styled-components";
+import styled from 'styled-components';
 import axios from 'axios';
 import Modal from '../../musterd-ui/Modal';
+import Alert from './component/Alert';
 
-/*const IDwarning = styled.div`
-  width: 200px;
+const WarningWrapper = styled.div`
+  width: 14.5em;
   text-align: left;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-`;*/
+`;
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -78,7 +81,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   //회원가입 버튼 눌렀을 때
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     if (
       email &&
       warningEmail === '' &&
@@ -87,17 +90,23 @@ const SignUp = () => {
       warningName === '' &&
       univ
     ) {
-      setIsPopup(!isPopup);
-      // axios
-      //   .post(`api주소`, { email, password, name, univ })
-      //   .then(() => {
-      //     //console.log(response);
-      //     alert('회원가입이 완료 되었습니다.');
-      //     navigate('/login');
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      axios
+        .post(`http://139.162.67.184:8000/account/signup`, {
+          email: email,
+          password: password,
+          username: name,
+          univ: univ,
+        })
+        .then((response) => {
+          console.log(response);
+          //alert('회원가입이 완료 되었습니다.');
+          setIsPopup(!isPopup);
+          //navigate('/login');
+        })
+        .catch((error) => {
+          Alert('이미 가입되어 있는 계정입니다.');
+          console.log(error);
+        });
     }
   };
 
@@ -107,6 +116,7 @@ const SignUp = () => {
 
   return (
     <>
+      <style>{'body { background-color: #F7F6F2; }'}</style>
       {isPopup ? (
         <Modal
           completeModal={isPopup}
@@ -118,38 +128,56 @@ const SignUp = () => {
       ) : (
         <></>
       )}
-      <style>{'body { background-color: #0404b4;}'}</style>
-      <LoginWrapper width="90%">
-        <TextBox
-          fontSize="50px"
-          fontWeight="lighter"
-          cursor="default"
-          color="#FACC2E"
-        >
-          SignUp
-        </TextBox>
+      <LoginWrapper width="100%">
+        <TitleWrapper marginBottom="2em">
+          <TextBox
+            fontSize="35px"
+            cursor="default"
+            color="black"
+            fontWeight="bold"
+          >
+            Musterd
+          </TextBox>
+          <TextBox
+            fontSize="15px"
+            cursor="default"
+            color="black"
+            fontWeight="bold"
+          >
+            : Make our plan
+          </TextBox>
+        </TitleWrapper>
         <Input
           name="name"
           type="text"
-          placeholder="이름 *"
-          width="200px"
-          height="30px"
+          placeholder="Name *"
+          border="1px solid black"
+          width="17em"
+          height="35px"
           fontSize="13.5px"
           margin="20px 5px 0px 5px"
           onChange={onChange}
         />
         <br />
-        <TextBox color="#fefefe" padding="2px 13px 0 0">
-          {warningName}
-        </TextBox>
+        <WarningWrapper>
+          <TextKorean
+            color="#707070"
+            padding="2px 13px 0 0"
+            fontWeight="semi-bold"
+          >
+            {warningName}
+          </TextKorean>
+        </WarningWrapper>
+
         <Input
           name="univ"
           type="text"
-          placeholder="학교 *"
-          width="200px"
-          height="30px"
+          placeholder="University *"
+          border="1px solid black"
+          width="17em"
+          height="35px"
           fontSize="13.5px"
-          margin="10px 5px 0px 5px"
+          margin="25px 0 0 0"
           onChange={onChange}
         />
         <br />
@@ -157,46 +185,69 @@ const SignUp = () => {
           name="email"
           type="email"
           placeholder="e-mail *"
-          width="200px"
-          height="30px"
+          border="1px solid black"
+          width="17em"
+          height="35px"
           fontSize="13.5px"
-          margin="10px 5px 0px 5px"
+          margin="25px 0 0 0"
           onChange={onChange}
         />
         <br />
-
-        <TextBox color="#fefefe" padding="2px 35px 0 0" cursor="default">
-          {warningEmail}
-        </TextBox>
+        <WarningWrapper>
+          <TextKorean
+            color="#707070"
+            padding="2px 35px 0 0"
+            cursor="default"
+            fontWeight="semi-bold"
+          >
+            {warningEmail}
+          </TextKorean>
+        </WarningWrapper>
 
         <Input
           name="password"
           type="password"
-          placeholder="비밀번호 *"
-          width="200px"
-          height="30px"
+          placeholder="Password *"
+          border="1px solid black"
+          width="17em"
+          height="35px"
           fontSize="13.5px"
-          margin="10px 5px 0px 5px"
+          margin="25px 0 0 0"
           onChange={onChange}
         />
         <br />
-        <TextBox color="#fefefe" padding="2px 20px 0 0" cursor="default">
-          {warningPW}
-        </TextBox>
+        <WarningWrapper>
+          <TextKorean
+            color="#707070"
+            padding="2px 20px 0 0"
+            cursor="default"
+            fontWeight="semi-bold"
+          >
+            {warningPW}
+          </TextKorean>
+        </WarningWrapper>
         <Input
           name="checkPassword"
           type="password"
-          placeholder="비밀번호 확인 *"
-          width="200px"
-          height="30px"
+          placeholder="Check Password *"
+          border="1px solid black"
+          width="17em"
+          height="35px"
           fontSize="13.5px"
-          margin="10px 5px 0px 5px"
+          margin="25px 0 0 0"
           onChange={onChange}
         />
         <br />
-        <TextBox color="#fefefe" padding="2px 50px 0 0" cursor="default">
-          {warningCheckPW}
-        </TextBox>
+        <WarningWrapper>
+          <TextKorean
+            color="#707070"
+            padding="2px 50px 0 0"
+            cursor="default"
+            fontWeight="semi-bold"
+          >
+            {warningCheckPW}
+          </TextKorean>
+        </WarningWrapper>
         <Button
           backgroundColor={
             email &&
@@ -205,13 +256,15 @@ const SignUp = () => {
             checkPassword === password &&
             warningName === '' &&
             univ
-              ? '#FACC2E'
+              ? '#F3C93F'
               : 'lightgray'
           }
           width="200px"
           height="30px"
           fontSize="14px"
-          margin="20px"
+          margin="3.3em 0 2em 0"
+          borderRadius="0"
+          border="1px solid black"
           cursor={
             email &&
             warningEmail === '' &&
@@ -224,26 +277,25 @@ const SignUp = () => {
           }
           onClick={onSubmit}
         >
-          회원가입
+          Sign Up
         </Button>
         <br />
         <TextBox
           fontSize="13px"
-          color="white"
+          color="#7C7C7C"
           display="inline"
           cursor="default"
-          padding="0 20px 0 0"
+          padding="0 13px 0 0"
         >
-          이미 계정이 있습니까?
+          Do you have an account already ?
         </TextBox>
         <TextBox
-          fontSize="13px"
+          fontSize="14px"
           display="inline"
           cursor="pointer"
-          color="#FACC2E"
           onClick={toLogin}
         >
-          로그인
+          Login
         </TextBox>
       </LoginWrapper>
     </>
