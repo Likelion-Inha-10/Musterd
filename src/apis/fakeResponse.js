@@ -4,7 +4,7 @@ export const categoryPlans = [
     plan_list: [
       {
         id: 1,
-        place: '하타가야1호점',
+        place: '실내 체육관',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
         title: '이성인 선배님과 배드민턴치기',
@@ -15,13 +15,13 @@ export const categoryPlans = [
       },
       {
         id: 2,
-        place: '하타가야2호점',
+        place: '인하대 대운동장',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
-        title: '이성인 선배님과 축구치기',
+        title: '이성인 선배님과 축구하기',
         promise_time: 123126,
-        max_count: 5,
-        count: 3,
+        max_count: 22,
+        count: 15,
         reward: '10% 할인',
       },
       {
@@ -29,7 +29,7 @@ export const categoryPlans = [
         place: '하타rfrf',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
-        title: '이성인 선배님과 배드턴치기',
+        title: '이성인 선배님과 배드민턴치기',
         promise_time: 123125,
         max_count: 5,
         count: 3,
@@ -56,7 +56,7 @@ export const categoryPlans = [
         place: '찌개사랑',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
-        title: '이성인 선배님과 밥약속',
+        title: '재원 선배님과 밥약속',
         promise_time: 123127,
         max_count: 5,
         count: 3,
@@ -64,10 +64,10 @@ export const categoryPlans = [
       },
       {
         id: 4,
-        place: '옹기종기',
+        place: '산쪼메',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
-        title: '이성인 선배님과 회먹기',
+        title: '서정 선배님과 라멘먹기',
         promise_time: 123128,
         max_count: 5,
         count: 3,
@@ -102,10 +102,10 @@ export const categoryPlans = [
     plan_list: [
       {
         id: 3,
-        place: '찌개사랑',
+        place: '카페 삼층',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
-        title: '이성인 선배님과 밥약속',
+        title: '소정 선배와 알고리즘 공부',
         promise_time: 123127,
         max_count: 5,
         count: 3,
@@ -113,10 +113,10 @@ export const categoryPlans = [
       },
       {
         id: 4,
-        place: '옹기종기',
+        place: '하타가야 카페',
         profile_image:
           'https://user-images.githubusercontent.com/37991960/184546080-9222b594-76a2-4c97-9cab-65ebe4348410.JPG', //플랜 제작자의 프로필 사진
-        title: '이성인 선배님과 회먹기',
+        title: '토플 공부하기',
         promise_time: 123128,
         max_count: 5,
         count: 3,
