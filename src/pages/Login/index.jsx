@@ -86,6 +86,7 @@ const Login = () => {
       };
       e.preventDefault();
       dispatch(login(body));
+      navigate('/mypage');
       /*
         .catch((error) => {
           console.log(error);

@@ -12,6 +12,7 @@ import {
 } from 'react-icons/bs';
 import { getPlan } from '../../../apis/planApi';
 import * as planApi from '../../../apis/planApi';
+import Modal from '../../../musterd-ui/Modal';
 
 // 전체 컨테이너
 const Container = styled.div`
@@ -327,6 +328,14 @@ const TodoList = () => {
   const [clickToDo, setClickToDo] = useState(true); // 할 일 & 완료
   const [isOpen, setisOpen] = useState(false); // 캘린더
   const [modify, setModify] = useState(false); // 편집 기능
+  const [addPopup, setAddPopup] = useState(false);
+  const [placePopup, setPlacePopup] = useState(false);
+  const [profilePopup, setProfilePopup] = useState(false); //모달 적용
+
+  //프로필 누를때 팝업
+  const onClickProfile = () => {
+    setProfilePopup(!profilePopup);
+  };
 
   // ToDo 를 클릭하면 true 값으로 바뀜.
   const onClickIsToDo = (e) => {
@@ -342,12 +351,19 @@ const TodoList = () => {
   const onClickisOpen = (e) => {
     setisOpen(!isOpen);
   };
-
+  //Plus 버튼 입력시 팝업
+  const onClickPlus = () => {
+    setAddPopup(!addPopup);
+  };
   // 마이너스 버튼 눌렀을 때 편집기능
   const onClickModify = (e) => {
     setModify(!modify);
   };
 
+  //장소클릭시 팝업
+  const onClickPlace = () => {
+    setPlacePopup(!placePopup);
+  };
   //**************************************Api 관련********************************************
 
   // Api 값을 불러옴.
@@ -374,137 +390,172 @@ const TodoList = () => {
   };
 
   return (
-    <Container>
-      {/* TopBar */}
-      <TopBar>
-        <MusterdText>Musterd</MusterdText>
-        <ProfilePic />
-      </TopBar>
-      <hr className="tophr"></hr>
-      {/* 캘린더 버튼 */}
-      <Calendar onClick={onClickisOpen}>
-        <CalendarText>Calendar</CalendarText>
-        {isOpen ? <BsChevronUp size="10" /> : <BsChevronDown size="10" />}
-      </Calendar>
-      {/* 날짜 */}
-      <DateBody>
-        <DateContainer>
-          <BsChevronCompactLeft
-            style={{ fontSize: '30px', marginRight: '50px' }}
-          />
-          <NowYear>2022</NowYear>
-          <NowDate>8.17</NowDate>
-          <DayWeek>Wedsday</DayWeek>
-          <BsChevronCompactRight
-            style={{ fontSize: '30px', marginLeft: '50px' }}
-          />
-        </DateContainer>
-      </DateBody>
-      {/* ToDo & Done 버튼 */}
-      <DoneContainer>
-        <ButtonWrapper onClick={onClickIsToDo}>
-          {clickToDo ? (
-            <YellowButton>ToDo</YellowButton>
-          ) : (
-            <WhiteButton>ToDo</WhiteButton>
-          )}
-        </ButtonWrapper>
-        <ButtonWrapper onClick={onClickIsDone}>
-          {!clickToDo ? (
-            <YellowButton>Done</YellowButton>
-          ) : (
-            <WhiteButton>Done</WhiteButton>
-          )}
-        </ButtonWrapper>
-      </DoneContainer>
-      {/* 플러스 마이너스 버튼  */}
-      <PlusMinusContainer>
-        {/* 플러스 버튼 */}
-        <BsPlusSquare
-          style={{
-            backgroundColor: '#F3C93F',
-            marginLeft: '268px',
-            marginRight: '33px',
-          }}
-          size="24"
+    <>
+      {addPopup ? (
+        <Modal addModal={addPopup} setAddModal={setAddPopup} type="addPopUp" />
+      ) : (
+        <></>
+      )}
+      {placePopup ? (
+        <Modal
+          placeModal={placePopup}
+          setPlaceModal={setPlacePopup}
+          type="placePopUp"
         />
-        {/* 마이너스 버튼 */}
-        {/* 마이너스 버튼을 누르면 완료버튼으로 바뀜 */}
-        {modify ? (
-          <BsCheckCircle
-            style={{ marginRight: '26px' }}
-            size="24"
-            onClick={onClickModify}
-          />
-        ) : (
-          <BsDashSquare
-            style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
-            size="24"
-            onClick={onClickModify}
-          />
-        )}
-      </PlusMinusContainer>
+      ) : (
+        <></>
+      )}
+      {profilePopup ? (
+        <Modal
+          profileModal={profilePopup}
+          setProfileModal={setProfilePopup}
+          type="myprofilePopUp"
+        />
+      ) : (
+        <></>
+      )}
 
-      {/* 플랜 파트 */}
-      <MainContainer>
-        {clickToDo
-          ? plans.map((plan) => (
-              <>
-                {!plan.isDone && (
-                  <PlanContainer key={plan.id}>
-                    {/* 편집 기능을 눌렀다면 동그란 마이너스 아니면 빈 박스 */}
-                    {modify ? (
-                      <BsDashCircle
-                        size="24"
-                        color="#3993CB"
-                        style={{ marginRight: '18px' }}
-                        onClick={onClickDelete}
-                      />
-                    ) : (
-                      <EmptyCheckBox onClick={onClickEmptyBox} />
-                    )}
-                    <PlanBox>
-                      <PlanTime>{plan.promise_time}</PlanTime>
-                      <PlanBody>{plan.title}</PlanBody>
-                      {plan.is_mine ? (
-                        <PlaceButton>Place</PlaceButton>
+      <Container>
+        {/* TopBar */}
+        <TopBar>
+          <MusterdText>Musterd</MusterdText>
+          <ProfilePic onClick={onClickProfile} />
+        </TopBar>
+        <hr className="tophr"></hr>
+        {/* 캘린더 버튼 */}
+        <Calendar onClick={onClickisOpen}>
+          <CalendarText>Calendar</CalendarText>
+          {isOpen ? <BsChevronUp size="10" /> : <BsChevronDown size="10" />}
+        </Calendar>
+        {/* 날짜 */}
+        <DateBody>
+          <DateContainer>
+            <BsChevronCompactLeft
+              style={{ fontSize: '30px', marginRight: '50px' }}
+            />
+            <NowYear>2022</NowYear>
+            <NowDate>8.17</NowDate>
+            <DayWeek>Wedsday</DayWeek>
+            <BsChevronCompactRight
+              style={{ fontSize: '30px', marginLeft: '50px' }}
+            />
+          </DateContainer>
+        </DateBody>
+        {/* ToDo & Done 버튼 */}
+        <DoneContainer>
+          <ButtonWrapper onClick={onClickIsToDo}>
+            {clickToDo ? (
+              <YellowButton>ToDo</YellowButton>
+            ) : (
+              <WhiteButton>ToDo</WhiteButton>
+            )}
+          </ButtonWrapper>
+          <ButtonWrapper onClick={onClickIsDone}>
+            {!clickToDo ? (
+              <YellowButton>Done</YellowButton>
+            ) : (
+              <WhiteButton>Done</WhiteButton>
+            )}
+          </ButtonWrapper>
+        </DoneContainer>
+        {/* 플러스 마이너스 버튼  */}
+        <PlusMinusContainer>
+          {/* 플러스 버튼 */}
+          <BsPlusSquare
+            style={{
+              backgroundColor: '#F3C93F',
+              marginLeft: '268px',
+              marginRight: '33px',
+            }}
+            size="24"
+            onClick={onClickPlus}
+          />
+          {/* 마이너스 버튼 */}
+          {/* 마이너스 버튼을 누르면 완료버튼으로 바뀜 */}
+          {modify ? (
+            <BsCheckCircle
+              style={{ marginRight: '26px' }}
+              size="24"
+              onClick={onClickModify}
+            />
+          ) : (
+            <BsDashSquare
+              style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
+              size="24"
+              onClick={onClickModify}
+            />
+          )}
+        </PlusMinusContainer>
+
+        {/* 플랜 파트 */}
+        <MainContainer>
+          {clickToDo
+            ? plans.map((plan) => (
+                <>
+                  {!plan.isDone && (
+                    <PlanContainer key={plan.id}>
+                      {/* 편집 기능을 눌렀다면 동그란 마이너스 아니면 빈 박스 */}
+                      {modify ? (
+                        <BsDashCircle
+                          size="24"
+                          color="#3993CB"
+                          style={{ marginRight: '18px' }}
+                          onClick={onClickDelete}
+                        />
                       ) : (
-                        <FriendPlaceButton>Place</FriendPlaceButton>
+                        <EmptyCheckBox onClick={onClickEmptyBox} />
                       )}
-                    </PlanBox>
-                  </PlanContainer>
-                )}
-              </>
-            ))
-          : plans.map((plan) => (
-              <>
-                {plan.isDone && (
-                  <PlanContainer key={plan.id}>
-                    {modify ? (
-                      <BsDashCircle
-                        size="24"
-                        color="#3993CB"
-                        style={{ marginRight: '18px' }}
-                        onClick={onClickDelete}
-                      />
-                    ) : (
-                      <FilledCheckBox onClick={onClcikFilledBox} />
-                    )}
-                    <PlanBox>
-                      <PlanTime>{plan.promise_time}</PlanTime>
-                      <PlanBody>{plan.title}</PlanBody>
-                      {plan.is_mine ? (
-                        <PlaceButton>Place</PlaceButton>
+                      <PlanBox>
+                        <PlanTime>{plan.promise_time}</PlanTime>
+                        <PlanBody>{plan.title}</PlanBody>
+                        {plan.is_mine ? (
+                          <PlaceButton onClick={onClickPlace}>
+                            Place
+                          </PlaceButton>
+                        ) : (
+                          <FriendPlaceButton onClick={onClickPlace}>
+                            Place
+                          </FriendPlaceButton>
+                        )}
+                      </PlanBox>
+                    </PlanContainer>
+                  )}
+                </>
+              ))
+            : plans.map((plan) => (
+                <>
+                  {plan.isDone && (
+                    <PlanContainer key={plan.id}>
+                      {modify ? (
+                        <BsDashCircle
+                          size="24"
+                          color="#3993CB"
+                          style={{ marginRight: '18px' }}
+                          onClick={onClickDelete}
+                        />
                       ) : (
-                        <FriendPlaceButton>Place</FriendPlaceButton>
+                        <FilledCheckBox onClick={onClcikFilledBox} />
                       )}
-                    </PlanBox>
-                  </PlanContainer>
-                )}
-              </>
-            ))}
-      </MainContainer>
-    </Container>
+                      <PlanBox>
+                        <PlanTime>{plan.promise_time}</PlanTime>
+                        <PlanBody>{plan.title}</PlanBody>
+                        {plan.is_mine ? (
+                          <PlaceButton onClick={onClickPlace}>
+                            Place
+                          </PlaceButton>
+                        ) : (
+                          <FriendPlaceButton onClick={onClickPlace}>
+                            Place
+                          </FriendPlaceButton>
+                        )}
+                      </PlanBox>
+                    </PlanContainer>
+                  )}
+                </>
+              ))}
+        </MainContainer>
+      </Container>
+    </>
   );
 };
 

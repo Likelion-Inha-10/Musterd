@@ -308,7 +308,7 @@ const AddPopUp = (props) => {
   };
 
   const onExitClick = () => {
-    props.setIsPopUp(!props.isPopUp);
+    props.setPopModal(!props.PopModal);
   };
 
   const onSearch = () => {
@@ -329,7 +329,7 @@ const AddPopUp = (props) => {
     //     max_count: maximum,
     //   }.then(() => console.log('성공'));
     console.log(toDo, category, search, maximum, date, time);
-    props.setIsPopUp(!props.isPopUp);
+    props.setPopModal(!props.PopModal);
   };
 
   return (

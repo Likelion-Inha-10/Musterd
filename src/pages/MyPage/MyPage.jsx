@@ -3,9 +3,9 @@ import TodoList from './Component/TodoList';
 
 const MyPage = () => {
   return (
-    <div>
-      <TodoList></TodoList>
-    </div>
+    <>
+      <TodoList />
+    </>
   );
 };
 
