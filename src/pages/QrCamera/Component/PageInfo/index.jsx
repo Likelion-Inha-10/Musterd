@@ -7,13 +7,14 @@ const TypoContainer = styled.div`
   height: 200px;
   background-color: transparent;
   text-align: center;
-  padding-top: 70px;
+  padding-top: 40px;
   margin-left: 50px;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const Line = styled.div`
-  border: 1px solid;
+  height: 1px;
+  background-color: black;
   width: 50%;
   margin: auto;
 `;
@@ -27,8 +28,6 @@ const Typography = styled.div`
 `;
 
 const PageInfo = () => {
-  const navigate = useNavigate();
-
   return (
     <>
       <Line />
