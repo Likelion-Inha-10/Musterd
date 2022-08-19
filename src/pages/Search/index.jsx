@@ -5,8 +5,81 @@ import * as categoryPlanApi from '../../apis/categoryPlanApi';
 import * as friendListApi from '../../apis/friendListApi';
 import CategoryPlan from './Component/CategoryPlan';
 import FriendProfile from './Component/FriendProfile';
+import NavigationBar from '../../musterd-ui/NavigationBar';
 
-const Wrapper = styled.div``;
+const Nav = styled.div`
+  height: 8.5%;
+`;
+const Wrapper = styled.div`
+  background-color: ${(props) => props.theme.colors.basic};
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+const SelectWrapper = styled.div`
+  margin-top: 0.78125rem;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: flex-end;
+  margin-bottom: 1.4375rem;
+`;
+const Select = styled.select`
+  text-align: center;
+  height: 1.75rem;
+  width: 6.375rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+
+  &:focus {
+    border-color: red;
+  }
+`;
+const FriendWrapper = styled.div`
+  margin: 2.8125rem;
+`;
+const CategoryWrapper = styled.div`
+  font-size: 18px;
+  font-weight: 900;
+  margin-left: 1.53125rem;
+  margin-bottom: 0.625rem;
+`;
+
+const OPTIONS = [
+  { value: 'all', name: 'Category' },
+  { value: 'cafe', name: 'Cafe' },
+  { value: 'eat', name: '식사' },
+  { value: 'sports', name: '스포츠' },
+  { value: 'hobby', name: '취미' },
+  { value: 'study', name: '스터디' },
+];
+
+const SelectBox = (props) => {
+  return (
+    <Select>
+      {props.options.map((option) => (
+        <option
+          value={option.value}
+          defaultValue={props.defaultValue === option.value}
+        >
+          {option.name}
+        </option>
+      ))}
+    </Select>
+  );
+};
 
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -49,38 +122,44 @@ const Search = () => {
   };
 
   return (
-    <Wrapper>
-      <SearchBar
-        value={searchValue}
-        onChange={onChange}
-        onSubmit={onSubmit}
-        placeHolder={'친구이름'}
-      />
-      {isTyped ? (
-        <div>
-          이쪽은 사용자가 검색을 했을때 친구 목록을 보여주는 모습
-          {friendList.map((friend) => (
-            <FriendProfile
-              key={friend.id}
-              id={friend.id}
-              image={friend.image}
-              name={friend.name}
-              information={friend.information}
-            />
-          ))}
-        </div>
-      ) : (
-        <div>
-          여기는 사용자가 검색하지 않아서 카테고리별로 보여주는 모습
-          {planList.map((plan) => (
-            <div>
-              {plan.category}
-              <CategoryPlan planList={plan.plan_list} />
-            </div>
-          ))}
-        </div>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <SearchBar
+          value={searchValue}
+          onChange={onChange}
+          onSubmit={onSubmit}
+          placeHolder={'Search here'}
+        />
+        {isTyped ? (
+          <FriendWrapper>
+            {friendList.map((friend) => (
+              <FriendProfile
+                key={friend.id}
+                id={friend.id}
+                image={friend.image}
+                name={friend.name}
+                point={friend.point}
+              />
+            ))}
+          </FriendWrapper>
+        ) : (
+          <>
+            <SelectWrapper>
+              <SelectBox options={OPTIONS} />
+            </SelectWrapper>
+            {planList.map((plan) => (
+              <>
+                <CategoryWrapper># {plan.category}</CategoryWrapper>
+                <CategoryPlan planList={plan.plan_list} />
+              </>
+            ))}
+            <Nav>s</Nav>
+          </>
+        )}
+      </Wrapper>
+      <Nav />
+      <NavigationBar />
+    </>
   );
 };
 
