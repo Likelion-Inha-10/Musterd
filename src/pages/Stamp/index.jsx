@@ -24,7 +24,7 @@ const Underline = styled.hr`
 const Stamp = () => {
   return (
     <div>
-      <Header src="/stamp" back />
+      <Header back src="/stamp" />
 
       <Text>Travel Stamp</Text>
       <Underline />
