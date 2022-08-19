@@ -277,7 +277,7 @@ const Search = () => {
         )}
       </Wrapper>
       <Nav />
-      <NavigationBar />
+      <NavigationBar pageNumber="2" />
     </>
   );
 };
