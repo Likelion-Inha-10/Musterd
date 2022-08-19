@@ -12,7 +12,7 @@ const Box = styled.div`
   height: 40px;
   background-color: #f3c93f;
   border: 1px solid #000000;
-  font-sizw: 20px;
+  font-size: 20px;
   font-weight: 800;
 `;
 
