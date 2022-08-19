@@ -8,11 +8,10 @@ import {
   BsChevronDown,
   BsChevronUp,
   BsCheckCircle,
-  BsDashCircle
+  BsDashCircle,
 } from 'react-icons/bs';
 import { getPlan } from '../../../apis/planApi';
 import * as planApi from '../../../apis/planApi';
-
 
 // 전체 컨테이너
 const Container = styled.div`
@@ -65,7 +64,7 @@ const ProfilePic = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
 
-  background-color: #3993CB;
+  background-color: #3993cb;
 `;
 
 // ******************************************Calendar***********************************************
@@ -155,14 +154,13 @@ const ButtonWrapper = styled.div`
   height: 58px;
 
   display: flex;
-
 `;
 // 노란 버튼
 const YellowButton = styled.div`
   width: 188px;
   height: 58px;
 
-  background-color: #F2C93F;
+  background-color: #f2c93f;
   border: 1.1px solid black;
   font-size: 15px;
   font-weight: 900;
@@ -208,30 +206,29 @@ const MainContainer = styled.div`
 
   margin-top: 35px;
 
-    /* 스크롤 바 */
-    overflow: scroll;
-    &::-webkit-scrollbar {
-      width: 6px;
-      height: 0px;
-      border: 1px solid black;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #f2c93f;
-      border: 1px solid black;
-    }
-  
+  /* 스크롤 바 */
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 0px;
+    border: 1px solid black;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #f2c93f;
+    border: 1px solid black;
+  }
 `;
 
-  // 체크박스 , 플랜 을 담는 컨테이너
-  const PlanContainer = styled.div`
-    width: 333px;
-    height: 49px;
+// 체크박스 , 플랜 을 담는 컨테이너
+const PlanContainer = styled.div`
+  width: 333px;
+  height: 49px;
 
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 
-    display: flex;
-    align-items: center;
-  `;
+  display: flex;
+  align-items: center;
+`;
 
 // 빈 체크박스
 const EmptyCheckBox = styled.div`
@@ -243,142 +240,138 @@ const EmptyCheckBox = styled.div`
   border: 1.1px solid black;
 `;
 
-  // 체크된 체크박스
-  const FilledCheckBox = styled.div`
-    width: 24px;
-    height: 24px;
+// 체크된 체크박스
+const FilledCheckBox = styled.div`
+  width: 24px;
+  height: 24px;
 
-    margin-right: 18px;
+  margin-right: 18px;
 
-    border: 1.1px solid black;
-    background-color: #f2c93f;
-  `;
+  border: 1.1px solid black;
+  background-color: #f2c93f;
+`;
 
-  // 플랜 박스
-  const PlanBox = styled.div`
-    width: 273px;
-    height: 49px;
+// 플랜 박스
+const PlanBox = styled.div`
+  width: 273px;
+  height: 49px;
 
-    border: 1.1px solid black;
+  border: 1.1px solid black;
 
-    display: flex;
-    align-items: center;
-  `;
+  display: flex;
+  align-items: center;
+`;
 
-  // 플랜의 시간, 분 을 담는 박스
-  const PlanTime= styled.div`
-    width: 45px;
-    height: 15px;
+// 플랜의 시간, 분 을 담는 박스
+const PlanTime = styled.div`
+  width: 45px;
+  height: 15px;
 
-    margin-left: 12px;
-    margin-right: 7px;
+  margin-left: 12px;
+  margin-right: 7px;
 
-    font-size: 10px;
+  font-size: 10px;
 
-    display: flex;
-    align-items: center;
-  `;
-  
+  display: flex;
+  align-items: center;
+`;
 
-  // 플랜 내용 박스
-  const PlanBody = styled.div`
-    width: 148px;
-    height: 20px;
+// 플랜 내용 박스
+const PlanBody = styled.div`
+  width: 148px;
+  height: 20px;
 
-    font-size: 15px;
+  font-size: 15px;
 
-    display: block;
+  display: block;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  `;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
-  // 장소버튼
-  const PlaceButton = styled.div`
-    width: 56px;
-    height: 24px;
-    border: 1.1px solid black;
-    margin-right: 14px;
-
-    background-color: #f3c93f;
-    font-size: 15px;
-    font-weight: bolder;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `;
-  
-  // 친구의 장소버튼
-  const FriendPlaceButton = styled.div`
+// 장소버튼
+const PlaceButton = styled.div`
   width: 56px;
   height: 24px;
   border: 1.1px solid black;
   margin-right: 14px;
 
-  background-color: #3993CB;
+  background-color: #f3c93f;
   font-size: 15px;
   font-weight: bolder;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  `;
+`;
 
-  const TodoList = () => {
-    
-    const [plans, setPlans] = useState([]); // 플랜을 담는 배열
-    const [clickToDo, setClickToDo] = useState(true); // 할 일 & 완료
-    const [isOpen, setisOpen] = useState(false); // 캘린더 
-    const [modify, setModify] = useState(false); // 편집 기능 
+// 친구의 장소버튼
+const FriendPlaceButton = styled.div`
+  width: 56px;
+  height: 24px;
+  border: 1.1px solid black;
+  margin-right: 14px;
+
+  background-color: #3993cb;
+  font-size: 15px;
+  font-weight: bolder;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TodoList = () => {
+  const [plans, setPlans] = useState([]); // 플랜을 담는 배열
+  const [clickToDo, setClickToDo] = useState(true); // 할 일 & 완료
+  const [isOpen, setisOpen] = useState(false); // 캘린더
+  const [modify, setModify] = useState(false); // 편집 기능
 
   // ToDo 를 클릭하면 true 값으로 바뀜.
-    const onClickIsToDo = (e) => {
-      setClickToDo(true);
-    };
+  const onClickIsToDo = (e) => {
+    setClickToDo(true);
+  };
 
   // Done 을 누르면 false 값으로 바뀜.
-    const onClickIsDone = (e) => {
-      setClickToDo(false);
-    };
+  const onClickIsDone = (e) => {
+    setClickToDo(false);
+  };
 
   //캘린더 열고 닫기
-    const onClickisOpen = (e) => {
-      setisOpen(!isOpen);
-    };
+  const onClickisOpen = (e) => {
+    setisOpen(!isOpen);
+  };
 
-    // 마이너스 버튼 눌렀을 때 편집기능
-    const onClickModify = (e) => {
-      setModify(!modify);
-    };
+  // 마이너스 버튼 눌렀을 때 편집기능
+  const onClickModify = (e) => {
+    setModify(!modify);
+  };
 
   //**************************************Api 관련********************************************
 
- // Api 값을 불러옴.
- useEffect(() => {
-  planApi.getPlan().then((res) => {
-    setPlans(res);
-    console.log(res);
+  // Api 값을 불러옴.
+  useEffect(() => {
+    planApi.getPlan().then((res) => {
+      setPlans(res);
+      console.log(res);
     });
-  }, []);  
+  }, []);
 
   // 동그란 마이너스 버튼 눌렀을 때 삭제
   const onClickDelete = (e) => {
-    console.log('삭제')
+    console.log('삭제');
   };
 
   // 빈 체크박스 눌렀을 때 완료로 넘어감
   const onClickEmptyBox = (e) => {
-    console.log('완료')
+    console.log('완료');
   };
 
   // 채워진 체크박스 눌렀을 때 미완료로 넘어감
-  const onClcikFilledBox = (e) =>{
+  const onClcikFilledBox = (e) => {
     console.log('미완료');
   };
-
-
 
   return (
     <Container>
@@ -391,33 +384,37 @@ const EmptyCheckBox = styled.div`
       {/* 캘린더 버튼 */}
       <Calendar onClick={onClickisOpen}>
         <CalendarText>Calendar</CalendarText>
-        {isOpen ? <BsChevronUp size="10" /> :<BsChevronDown size="10" />}  
+        {isOpen ? <BsChevronUp size="10" /> : <BsChevronDown size="10" />}
       </Calendar>
       {/* 날짜 */}
       <DateBody>
         <DateContainer>
-          <BsChevronCompactLeft style={{ fontSize: '30px', marginRight:'50px' }} />
+          <BsChevronCompactLeft
+            style={{ fontSize: '30px', marginRight: '50px' }}
+          />
           <NowYear>2022</NowYear>
           <NowDate>8.17</NowDate>
           <DayWeek>Wedsday</DayWeek>
-          <BsChevronCompactRight style={{ fontSize: '30px', marginLeft:'50px' }} />
+          <BsChevronCompactRight
+            style={{ fontSize: '30px', marginLeft: '50px' }}
+          />
         </DateContainer>
       </DateBody>
       {/* ToDo & Done 버튼 */}
       <DoneContainer>
         <ButtonWrapper onClick={onClickIsToDo}>
           {clickToDo ? (
-          <YellowButton>ToDo</YellowButton>
-          ):(
-          <WhiteButton>ToDo</WhiteButton>
-          ) }
+            <YellowButton>ToDo</YellowButton>
+          ) : (
+            <WhiteButton>ToDo</WhiteButton>
+          )}
         </ButtonWrapper>
         <ButtonWrapper onClick={onClickIsDone}>
-        {!clickToDo ? (
-          <YellowButton>Done</YellowButton>
-          ):(
-          <WhiteButton>Done</WhiteButton>
-          ) }
+          {!clickToDo ? (
+            <YellowButton>Done</YellowButton>
+          ) : (
+            <WhiteButton>Done</WhiteButton>
+          )}
         </ButtonWrapper>
       </DoneContainer>
       {/* 플러스 마이너스 버튼  */}
@@ -435,16 +432,17 @@ const EmptyCheckBox = styled.div`
         {/* 마이너스 버튼을 누르면 완료버튼으로 바뀜 */}
         {modify ? (
           <BsCheckCircle
-          style={{marginRight: '26px' }}
-          size="24" 
-          onClick={onClickModify}
-        />
-        ):(
-        <BsDashSquare
-          style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
-          size="24"
-          onClick={onClickModify}
-        />) }
+            style={{ marginRight: '26px' }}
+            size="24"
+            onClick={onClickModify}
+          />
+        ) : (
+          <BsDashSquare
+            style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
+            size="24"
+            onClick={onClickModify}
+          />
+        )}
       </PlusMinusContainer>
 
       {/* 플랜 파트 */}
@@ -456,27 +454,23 @@ const EmptyCheckBox = styled.div`
                   <PlanContainer key={plan.id}>
                     {/* 편집 기능을 눌렀다면 동그란 마이너스 아니면 빈 박스 */}
                     {modify ? (
-                    <BsDashCircle 
-                    size= '24' 
-                    color='#3993CB'
-                    style={{marginRight:'18px'}} 
-                    onClick={onClickDelete}
-                    />
-                    ):(
-                    <EmptyCheckBox 
-                    onClick={onClickEmptyBox}
-                    />
-                    )
-                    }
+                      <BsDashCircle
+                        size="24"
+                        color="#3993CB"
+                        style={{ marginRight: '18px' }}
+                        onClick={onClickDelete}
+                      />
+                    ) : (
+                      <EmptyCheckBox onClick={onClickEmptyBox} />
+                    )}
                     <PlanBox>
                       <PlanTime>{plan.promise_time}</PlanTime>
                       <PlanBody>{plan.title}</PlanBody>
                       {plan.is_mine ? (
-                      <PlaceButton>Place</PlaceButton>
-                      ):(
-                      <FriendPlaceButton>Place</FriendPlaceButton>  
+                        <PlaceButton>Place</PlaceButton>
+                      ) : (
+                        <FriendPlaceButton>Place</FriendPlaceButton>
                       )}
-                      
                     </PlanBox>
                   </PlanContainer>
                 )}
@@ -486,26 +480,23 @@ const EmptyCheckBox = styled.div`
               <>
                 {plan.isDone && (
                   <PlanContainer key={plan.id}>
-                     {modify ? (
-                    <BsDashCircle 
-                    size= '24' 
-                    color='#3993CB'
-                    style={{marginRight:'18px'}} 
-                    onClick={onClickDelete}
-                    />
-                    ):(
-                    <FilledCheckBox 
-                    onClick={onClcikFilledBox}
-                    />
-                    )
-                    }
+                    {modify ? (
+                      <BsDashCircle
+                        size="24"
+                        color="#3993CB"
+                        style={{ marginRight: '18px' }}
+                        onClick={onClickDelete}
+                      />
+                    ) : (
+                      <FilledCheckBox onClick={onClcikFilledBox} />
+                    )}
                     <PlanBox>
                       <PlanTime>{plan.promise_time}</PlanTime>
                       <PlanBody>{plan.title}</PlanBody>
                       {plan.is_mine ? (
-                      <PlaceButton>Place</PlaceButton>
-                      ):(
-                      <FriendPlaceButton>Place</FriendPlaceButton>  
+                        <PlaceButton>Place</PlaceButton>
+                      ) : (
+                        <FriendPlaceButton>Place</FriendPlaceButton>
                       )}
                     </PlanBox>
                   </PlanContainer>
