@@ -1,33 +1,19 @@
 import styled from 'styled-components';
-import BackImg from '../Main/landing.png';
 import React from 'react';
 import LikeImg from '../Main/landing_like.png';
 import LionImg from '../Main/landing_lion.png';
 import { useNavigate } from 'react-router-dom';
 
-const ImageBox = styled.div`
-  width: 100vw;
-`;
-
-const Image = styled.img`
-  width: 100vw;
-  height: 896px;
-`;
-
 const PlanContainer = styled.div`
   width: 333px;
   height: 49px;
 
-  margin-bottom: 30px;
-
   display: flex;
   align-items: center;
-
-  position: absolute;
-  top: ${(props) => props.top || '100px'};
-
+  position: sticky;
   margin-left: 50px;
-  margin-top: 80vw;
+  margin-top: 40px;
+  margin-bottom: 50px;
 `;
 
 const EmptyCheckBox = styled.div`
@@ -66,8 +52,6 @@ const PlanBody = styled.div`
   font-family: 'Roboto Slab', serif;
   font-weight: 900;
 
-  z-index: 1;
-
   margin-left: ${(props) => props.marginLeft || '20px'};
   margin-right: 10px;
 `;
@@ -93,6 +77,18 @@ const PlanTime = styled.div`
   align-items: center;
 `;
 
+const LikeLionText = styled.div`
+  color: #f3c93f;
+  font-size: 40px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
+  -webkit-text-stroke: 1.5px black;
+  display: flex;
+  margin-top: 200px;
+  margin-bottom: 250px;
+  justify-content: center;
+`;
+
 const Main = () => {
   let navigate = useNavigate();
 
@@ -105,10 +101,7 @@ const Main = () => {
   };
   return (
     <div>
-      <ImageBox>
-        <Image src={BackImg}></Image>
-      </ImageBox>
-
+      <LikeLionText>Musterd</LikeLionText>
       <PlanContainer>
         <EmptyCheckBox />
         <PlanBox onClick={moveToLogin}>
