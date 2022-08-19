@@ -8,7 +8,6 @@ import QrCamera from '../pages/QrCamera';
 import MyPage from '../pages/MyPage/MyPage';
 import Stamp from '../pages/Stamp';
 import LikeLion from '../pages/Stamp/Component/StampPage/LikeLion';
-import Performance from '../pages/Stamp/Component/Performance/index';
 import Harvardcomplete from '../pages/Stamp/Component/Performance/harvardcomplete';
 import AddPopUp from '../musterd-ui/PopUpStyled/AddPopUp';
 import InhaUni from '../pages/Stamp/Component/StampPage/InhaUni';
