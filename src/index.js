@@ -33,16 +33,7 @@ const GlobalStyles = createGlobalStyle`
   
   * {
     box-sizing: border-box;
-    @font-face {
-      font-family: "NotoSansKR";
-      //src: url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap');
-      unicode-range: U+0041-005A, U+0061-007A;
-    }
-    @font-face {
-      font-family: 'Roboto Slab', serif;
-      //src: url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap');
-      font-style: normal;
-    }
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif','Roboto Slab', serif;
     outline: none;
   }
 `;

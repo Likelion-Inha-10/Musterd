@@ -12,6 +12,8 @@ import {
 } from 'react-icons/bs';
 import { getPlan } from '../../../apis/planApi';
 import * as planApi from '../../../apis/planApi';
+import { setCookies } from './../../Login/index';
+import { TextBox } from '../../../musterd-ui/LoginSignupStyled';
 
 // 전체 컨테이너
 const Container = styled.div`
@@ -94,39 +96,29 @@ const CalendarText = styled.div`
 `;
 // ***********************************************************************************************
 
-// 날짜 컨테이너
-const DateBody = styled.div`
-  height: 90px;
-
-  padding-top: 9px;
-
-  display: flex;
-  align-items: center;
-`;
-
 //  좌우버튼 , 연도 , 날짜 , 요일 컨테이너
 const DateContainer = styled.div`
-  height: 46px;
-
-  display: flex;
-  align-items: flex-end;
+  width: 375px;
+  border: none;
+  text-align: center;
+  padding: 10px 10px 0 10px;
+  margin: 20px 0;
 `;
 
 // 연도
 const NowYear = styled.div`
-  width: 60px;
-  height: 16px;
-  font-size: 15px;
-  margin-right: 9px;
-  display: flex;
-  justify-content: center;
+  margin-left: 50px;
+  float: left;
+  margin-top: 16px;
 `;
 
 // 날짜
 const NowDate = styled.div`
   font-size: 35px;
-
-  margin-right: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+  display: inline;
 `;
 
 // 요일
@@ -134,10 +126,127 @@ const DayWeek = styled.div`
   width: 60px;
   height: 16px;
   font-size: 15px;
-
-  display: flex;
-  justify-content: center;
+  float: right;
+  margin-right: 20px;
+  margin-top: 16px;
 `;
+const TimeBar = () => {
+  let now = new Date(); // 현재 날짜 및 시간
+  let todayYear = now.getFullYear(); // 연도 가져옴
+  let todayMonth = now.getMonth() + 1; // 월 가져옴
+  let todayDate = now.getDate(); // 일 가져옴
+  const week = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  //let dayOfWeek = week[weekIndex]; // 요일 가져옴
+  const [weekIndex, setWeekIndex] = useState(now.getDay());
+  const [year, setYear] = useState(todayYear);
+  const [date, setDate] = useState(todayDate);
+  const [month, setMonth] = useState(todayMonth);
+
+  const onCLickNextDay = () => {
+    if (month === 2) {
+      if (date === 28) {
+        setMonth(3);
+        setDate(1);
+      } else setDate(date + 1);
+    }
+    if (month === 12) {
+      //12월
+      if (date === 31) {
+        setYear(year + 1);
+        setMonth(1);
+        setDate(1);
+      } else setDate(date + 1);
+    }
+    if (
+      (month % 2 === 1 && month <= 7 && month > 0) ||
+      (month % 2 === 0 && month >= 8 && month < 12) //1, 3, 5, 7, 8, 10월
+    ) {
+      if (date === 31) {
+        setDate(1);
+        setMonth(month + 1);
+      } else setDate(date + 1);
+    }
+    if (
+      (month % 2 === 0 && month <= 7 && month > 3) ||
+      (month % 2 === 1 && month >= 8 && month < 12) //4,6,9,11월
+    ) {
+      if (date === 30) {
+        setDate(1);
+        setMonth(month + 1);
+      } else setDate(date + 1);
+    }
+
+    //요일
+    if (weekIndex === 6) setWeekIndex(0);
+    else setWeekIndex(weekIndex + 1);
+  };
+
+  const onClickPrevDay = (e) => {
+    if (month === 1) {
+      //1월
+      if (date === 1) {
+        setYear(year - 1);
+        setMonth(12);
+        setDate(31);
+      } else setDate(date - 1);
+    }
+    if (month === 3) {
+      if (date === 1) {
+        setMonth(2);
+        setDate(28);
+      } else setDate(date - 1);
+    }
+    if (
+      (month % 2 === 1 && month <= 7 && month >= 5) ||
+      (month % 2 === 0 && month >= 10 && month <= 12) //5,7,10,12
+    ) {
+      if (date === 1) {
+        setMonth(month - 1);
+        setDate(30);
+      } else setDate(date - 1);
+    }
+    if (
+      (month % 2 === 0 && month <= 8 && month > 1) ||
+      (month % 2 === 1 && month >= 9 && month < 12) //2,4,6,8,9,11
+    ) {
+      if (date === 1) {
+        setDate(31);
+        setMonth(month - 1);
+      } else setDate(date - 1);
+    }
+
+    //요일
+    if (weekIndex === 0) setWeekIndex(6);
+    else setWeekIndex(weekIndex - 1);
+  };
+
+  return (
+    <>
+      <DateContainer>
+        <TextBox fontSize="30px" float="left">
+          <BsChevronCompactLeft onClick={onClickPrevDay} cursor="pointer" />
+        </TextBox>
+        <NowYear>{year}</NowYear>
+        <NowDate>
+          {month}.{date}
+        </NowDate>
+        <TextBox fontSize="30px" float="right">
+          <BsChevronCompactRight onClick={onCLickNextDay} cursor="pointer" />
+        </TextBox>
+        <DayWeek>{week[weekIndex]}</DayWeek>
+      </DateContainer>
+    </>
+  );
+};
 
 //***************************************************************************************************
 
@@ -145,7 +254,7 @@ const DayWeek = styled.div`
 const DoneContainer = styled.div`
   height: 58px;
 
-  margin-top: 35px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 `;
@@ -224,7 +333,7 @@ const PlanContainer = styled.div`
   width: 333px;
   height: 49px;
 
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   display: flex;
   align-items: center;
@@ -263,7 +372,7 @@ const PlanBox = styled.div`
 `;
 
 // 플랜의 시간, 분 을 담는 박스
-const PlanTime = styled.div`
+const PlanTimeContainer = styled.div`
   width: 45px;
   height: 15px;
 
@@ -274,6 +383,15 @@ const PlanTime = styled.div`
 
   display: flex;
   align-items: center;
+`;
+
+// 플랜 시간 분
+const PlanTime = styled.div`
+  height: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 // 플랜 내용 박스
@@ -382,24 +500,9 @@ const TodoList = () => {
       </TopBar>
       <hr className="tophr"></hr>
       {/* 캘린더 버튼 */}
-      <Calendar onClick={onClickisOpen}>
-        <CalendarText>Calendar</CalendarText>
-        {isOpen ? <BsChevronUp size="10" /> : <BsChevronDown size="10" />}
-      </Calendar>
+
       {/* 날짜 */}
-      <DateBody>
-        <DateContainer>
-          <BsChevronCompactLeft
-            style={{ fontSize: '30px', marginRight: '50px' }}
-          />
-          <NowYear>2022</NowYear>
-          <NowDate>8.17</NowDate>
-          <DayWeek>Wedsday</DayWeek>
-          <BsChevronCompactRight
-            style={{ fontSize: '30px', marginLeft: '50px' }}
-          />
-        </DateContainer>
-      </DateBody>
+      <TimeBar />
       {/* ToDo & Done 버튼 */}
       <DoneContainer>
         <ButtonWrapper onClick={onClickIsToDo}>
@@ -464,7 +567,13 @@ const TodoList = () => {
                       <EmptyCheckBox onClick={onClickEmptyBox} />
                     )}
                     <PlanBox>
-                      <PlanTime>{plan.promise_time}</PlanTime>
+                      <PlanTimeContainer>
+                        <PlanTime>
+                          {Math.floor(plan.promise_time / 100)}
+                        </PlanTime>
+                        <p>:</p>
+                        <PlanTime>{plan.promise_time % 100}</PlanTime>
+                      </PlanTimeContainer>
                       <PlanBody>{plan.title}</PlanBody>
                       {plan.is_mine ? (
                         <PlaceButton>Place</PlaceButton>
@@ -491,7 +600,12 @@ const TodoList = () => {
                       <FilledCheckBox onClick={onClcikFilledBox} />
                     )}
                     <PlanBox>
-                      <PlanTime>{plan.promise_time}</PlanTime>
+                      <PlanTimeContainer>
+                        <PlanTime>
+                          {Math.floor(plan.promise_time / 100)}
+                        </PlanTime>
+                        <PlanTime>{plan.promise_time % 100}</PlanTime>
+                      </PlanTimeContainer>
                       <PlanBody>{plan.title}</PlanBody>
                       {plan.is_mine ? (
                         <PlaceButton>Place</PlaceButton>
