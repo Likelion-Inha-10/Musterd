@@ -1,26 +1,18 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const TEST = 'TEST';
-export const RESET = 'RESET';
-export const increment = () => {
-  return {
-    type: INCREMENT,
-  };
-};
+import { FAILURE, LOGIN_USER, SUCCESS } from './types';
+import { request } from './customAxios';
+const USER_URL = '/account';
 
-export const decrement = () => {
-  return {
-    type: DECREMENT,
-  };
-};
-
-export const testButtonIncrement = () => {
-  return {
-    type: TEST,
-  };
-};
-export const reset = () => {
-  return {
-    type: RESET,
-  };
-};
+export function login(dataToSubmit) {
+  try {
+    const data = request('post', USER_URL + '/signin', dataToSubmit);
+    console.log(data);
+    return {
+      type: LOGIN_USER,
+      payload: data,
+    };
+  } catch {
+    return {
+      type: FAILURE,
+    };
+  }
+}

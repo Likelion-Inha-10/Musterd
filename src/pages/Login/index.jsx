@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TextBox,
   Button,
@@ -8,14 +8,31 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from '../../musterd-ui/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/actions';
+import { Cookies } from 'react-cookie';
+const cookies = new Cookies();
 
+export const setCookies = (name, value, options) => {
+  return cookies.set(name, value, { ...options });
+};
+export const getCookie = (name) => {
+  return cookies.get(name);
+};
 const Login = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPW, setUserPW] = useState('');
   const [warning, setWarning] = useState('');
   const [isEmail, setIsEmail] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
-
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.login);
+  //
+  useEffect(() => {
+    if (auth.auth_token !== '') {
+      onLogin();
+    }
+  }, [auth]);
   const onChangeUserEmail = (e) => {
     //console.log(e.target.value);
     setUserEmail(e.target.value);
@@ -55,6 +72,14 @@ const Login = () => {
     navigate(`/signup`);
   };
 
+  const onSubmitHandler = (e) => {
+    let body = {
+      email: userEmail,
+      password: userPW,
+    };
+    e.preventDefault();
+    dispatch(login(body));
+  };
   /*페이지가 긴 경우 네비게이션 바 사용하려면
   <LoginWrapper top="0" transform="translate(-50%, 0)" height="750px">
   이런 식으로 세로 중앙 배열 제거하고 높이 지정해주면 된다.*/
@@ -121,7 +146,7 @@ const Login = () => {
           fontSize="14px"
           margin="20px"
           cursor={isEmail && userPW.length >= 6 ? 'pointer' : 'default'}
-          onClick={onLogin}
+          onClick={onSubmitHandler}
         >
           로그인
         </Button>
