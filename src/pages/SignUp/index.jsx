@@ -87,7 +87,20 @@ const SignUp = () => {
       warningName === '' &&
       univ
     ) {
-      setIsPopup(!isPopup);
+      axios
+        .post('/account/signup', {
+          email: email,
+          password: password,
+          username: password,
+          univ: univ,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // setIsPopup(!isPopup);
       // axios
       //   .post(`api주소`, { email, password, name, univ })
       //   .then(() => {
