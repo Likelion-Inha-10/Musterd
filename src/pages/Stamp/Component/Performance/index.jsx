@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from '../../../../musterd-ui/Header';
+import NavigationBar from '../../../../musterd-ui/NavigationBar';
 import stampimg from '../StampPage/image/hackathon.png';
 
 const TextWrapper = styled.div`
@@ -9,17 +11,18 @@ const TextWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #fff4de;
-  border: 1.1px solid #000000;
-  border-left: none;
-  border-right: none;
+  border-bottom: 1.5px solid #000000;
 `;
 
 const LikeLionText = styled.div`
-  color: #d98e00;
+  color: ${(props) => props.fontColor || '#d98e00'};
   font-size: 30px;
-  font-family: 'Roboto Slab', 800;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
   text-shadow: 0px 0px 1px black;
-  margin-top: 30px;
+  margin-bottom: ${(props) => props.marginBottom || '20px'};
+  margin-top: ${(props) => props.marginTop || '10px'};
+  -webkit-text-stroke: 1.5px black;
 `;
 const Text = styled.div`
   display: flex;
@@ -56,9 +59,12 @@ const Image = styled.img`
 const Performance = () => {
   return (
     <div>
+      <Header back src="/stamp"></Header>
       <TextWrapper>
-        <LikeLionText>LikeLion</LikeLionText>
-        <Text marginTop="10px">Mission Complete</Text>
+        <LikeLionText marginTop="30px" marginBottom="0px">
+          LikeLion
+        </LikeLionText>
+        <LikeLionText fontColor="black">Mission Complete</LikeLionText>
         <Underline width="284px" />
         <Text fontSize="17px">
           참여해주셔서 감사합니다!
@@ -70,6 +76,7 @@ const Performance = () => {
       <ImageBox>
         <Image src={stampimg}></Image>
       </ImageBox>
+      <NavigationBar pageNumber="3" />
     </div>
   );
 };

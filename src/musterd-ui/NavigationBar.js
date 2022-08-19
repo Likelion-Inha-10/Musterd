@@ -28,9 +28,9 @@ const NavigationButton = styled.div`
   align-items: center;
   justify-content: center;
   background: ${(props) => props.backgroundColor || '#f7f6f2'};
-  border-top: 1px solid #1d2053;
+  border-top: 1.5px solid #1d2053;
   border-bottom: none;
-  border-right: ${(props) => props.borderRight || '1px solid #1D2053'};
+  border-right: ${(props) => props.borderRight || '1.5px solid #1D2053'};
   border-left: ${(props) => props.borderLeft || 'none'};
   cursor: pointer;
 `;

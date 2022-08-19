@@ -12,7 +12,7 @@ const StyledHeader = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1.5px black;
   padding: 25px;
 `;
 
@@ -25,8 +25,9 @@ const BackWrapper = styled.div`
 
 const Typography = styled.h1`
   padding-left: 10px;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
 `;
 
 const ProfileIcon = styled.img`

@@ -7,9 +7,6 @@ const Box = styled.div`
   width: 100vw;
   height: 750px;
   background-color: #e3bdb7;
-  border: 1.1px solid #000000;
-  border-left: none;
-  border-right: none;
   display: flex;
   flex-direction: column;
   align-items: center;
