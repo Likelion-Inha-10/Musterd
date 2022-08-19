@@ -30,7 +30,6 @@ const ImageBox = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  position: relative;
   z-index: 1;
 `;
 const Image = styled.img`
