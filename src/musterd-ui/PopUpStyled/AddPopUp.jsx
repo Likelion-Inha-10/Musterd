@@ -15,10 +15,13 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
+  font-family: 'Noto Sans KR', sans-serif;
   width: ${(props) => (props.width ? props.width : '237px')};
   padding-left: 15px;
+  padding-right: 10px;
   height: 37px;
-  background-color: #f7f6f2;
+  background-color: ${(props) =>
+    props.backColor ? props.backColor : '#f7f6f2'};
   border-top: ${(props) => (props.borderTop ? props.borderTop : 'none')};
   border-left: ${(props) => (props.borderLeft ? props.borderLeft : 'none')};
   border-right: ${(props) => (props.borderRight ? props.borderRight : 'none')};
@@ -43,6 +46,12 @@ const Box = styled.div`
 const BtnWrapper = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const TimeWrapper = styled.div`
+  height: 37px;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledButton = styled.button`
@@ -151,6 +160,8 @@ const AddPopUp = (props) => {
   const [category, setCategory] = useState('Category'); //카테고리 설정
   const [buttonColor, setButtonColor] = useState('#efc63e'); //카테고리 배경색
   const [isCategoryName, setIsCategoryName] = useState(true);
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
 
   /*category 설정 부분*/
   const CategoryMenu = () => {
@@ -260,7 +271,7 @@ const AddPopUp = (props) => {
     const timeId = setTimeout(() => {
       friendListApi.getFriendByName(search).then((res) => {
         setLocationList(res);
-        console.log(res);
+        // console.log(res);
       });
     }, 300);
     return () => {
@@ -272,6 +283,20 @@ const AddPopUp = (props) => {
     setToDo(e.target.value);
   };
 
+  const onChangeDate = (e) => {
+    //날짜를 2022-08-18이면 20220818 형태로 설정
+    const regex = e.target.value.match(/\d+/g);
+    const tempDate = regex[0] + regex[1] + regex[2];
+    const date = parseInt(tempDate);
+    setDate(date);
+  };
+  const onChangeTime = (e) => {
+    const regex = e.target.value.match(/\d+/g);
+    const temptime = regex[0] + regex[1];
+    const time = parseInt(temptime);
+    setTime(time);
+  };
+
   const onChangeSearch = (e) => {
     if (e.target.value !== '') {
       setIstTyped(true);
@@ -279,7 +304,7 @@ const AddPopUp = (props) => {
       setIstTyped(false);
     }
     setSearch(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const onExitClick = () => {
@@ -303,6 +328,7 @@ const AddPopUp = (props) => {
     //     place: search,
     //     max_count: maximum,
     //   }.then(() => console.log('성공'));
+    console.log(toDo, category, search, maximum, date, time);
     props.setIsPopUp(!props.isPopUp);
   };
 
@@ -320,6 +346,27 @@ const AddPopUp = (props) => {
         >
           <AiOutlineClose size="20px" />
         </Box>
+        {/* 여기서부터 시간 설정 영역 */}
+        <TimeWrapper>
+          <Input
+            backColor="#f3c93f"
+            type="date"
+            width="50%"
+            borderTop="1px black solid"
+            borderRight="1px black solid"
+            placeholder="날짜 설정"
+            onChange={onChangeDate}
+          ></Input>
+          <Input
+            backColor="#f3c93f"
+            borderTop="1px black solid"
+            type="time"
+            width="50%"
+            onChange={onChangeTime}
+          ></Input>
+        </TimeWrapper>
+        {/* 여기까지 시간 설정 영역 */}
+        {/* 여기서부터 카테고리 영역 */}
         <BtnWrapper>
           <Input
             onChange={onChangeToDo}
@@ -330,6 +377,7 @@ const AddPopUp = (props) => {
           />
           <CategoryMenu />
         </BtnWrapper>
+        {/* 여기까지카테고리 영역 */}
         <BtnWrapper>
           <Box
             width="55px"
