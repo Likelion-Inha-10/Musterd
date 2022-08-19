@@ -1,139 +1,398 @@
-import { React, useRef, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { VscClose } from 'react-icons/vsc';
+import { AiOutlineClose } from 'react-icons/ai';
 import { GrSearch } from 'react-icons/gr';
-import { useNavigate } from 'react-router-dom';
+import * as friendListApi from '../../apis/friendListApi';
+import map from '../../assets/img/mapIcon.png';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f7f6f2;
-  border: 1.1px solid #000000;
+  border: 1px solid #000000;
   width: 337px;
   height: 296px;
-  margin: 2px 2px 2px 2px;
 `;
+
 const Input = styled.input`
   width: ${(props) => (props.width ? props.width : '237px')};
+  padding-left: 15px;
   height: 37px;
-  text-align: left;
   background-color: #f7f6f2;
-  border: 1px solid #000000;
+  border-top: ${(props) => (props.borderTop ? props.borderTop : 'none')};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : 'none')};
+  border-right: ${(props) => (props.borderRight ? props.borderRight : 'none')};
+  border-bottom: ${(props) =>
+    props.borderBottom ? props.borderBottom : 'none'};
 `;
+
 const Box = styled.div`
   width: ${(props) => (props.width ? props.width : '29px')};
   height: ${(props) => (props.height ? props.height : '29px')};
   background-color: #f3c93f;
-  border: 1.1px solid #000000;
+  border-top: ${(props) => (props.borderTop ? props.borderTop : 'none')};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : 'none')};
+  border-right: ${(props) => (props.borderRight ? props.borderRight : 'none')};
+  border-bottom: ${(props) =>
+    props.borderBottom ? props.borderBottom : 'none'};
   margin: ${(props) => (props.margin ? props.margin : 'none')};
   text-align: center;
   padding-top: ${(props) => (props.paddingtop ? props.paddingtop : 'none')};
   cursor: pointer;
-
-  :hover {
-    background-color: #00000084;
-  }
-`;
-const CategoryBtn = styled.div`
-  width: 100px;
-  height: 37px;
-  background-color: #efc63e;
-  border: 1.1px solid #000000;
 `;
 const BtnWrapper = styled.div`
   display: flex;
-  justify-align: column;
+  flex-direction: row;
 `;
-const Button = styled.div`
-  width: 100%;
-  height: 43px;
+
+const StyledButton = styled.button`
+  width: ${(props) => (props.width ? props.width : '100%')};
+  height: ${(props) => props.height};
   border: 1.1px solid #000000;
   background-color: #f3c93f;
   text-align: center;
   font-size: 18px;
-  padding-top: 10px;
-  margin: 128px 0px 0px 0px;
+  border-top: ${(props) =>
+    props.borderTop ? props.borderTop : '1px solid black'};
+  border-left: ${(props) =>
+    props.borderLeft ? props.borderLeft : '1px solid black'};
+  border-right: ${(props) =>
+    props.borderRight ? props.borderRight : '1px solid black'};
+  border-bottom: ${(props) =>
+    props.borderBottom ? props.borderBottom : '1px solid black'};
+  font-size: ${(props) => props.fontSize};
   cursor: pointer;
-
   :hover {
-    background-color: #00000084;
+    background-color: rgba(242, 201, 63, 0.8);
   }
 `;
 
-const AddPopUp = () => {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
-  const navigate = useNavigate();
-  const [list, setList] = useState('');
-  const [search, setSearch] = useState('');
+const CategoryBtn = styled.select`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100px;
+  background-color: ${(props) => props.backgroundColor || '#efc63e'};
+  border-top: ${(props) => (props.borderTop ? props.borderTop : 'none')};
+  border-left: ${(props) => (props.borderLeft ? props.borderLeft : 'none')};
+  border-right: ${(props) => (props.borderRight ? props.borderRight : 'none')};
+  border-bottom: ${(props) =>
+    props.borderBottom ? props.borderBottom : 'none'};
+  -webkit-scrollbar {
+    display: none;
+  }
+  size: ${(props) => props.size};
+  cursor: pointer;
+`;
 
-  const onChangeList = (e) => {
-    setList(e.target.value);
+const Option = styled.option`
+  background-color: ${(props) => props.backgroundColor};
+  position: absolute;
+  width: 100px;
+  height: 24px;
+  border-top: 1px solid black;
+  border-left: ${(props) => props.borderLeft || '1px solid black'};
+  border-right: ${(props) => props.borderRight || 'none'};
+  border-bottom: ${(props) => props.borderBottom || 'none'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${(props) => props.marginTop};
+  cursor: pointer;
+`;
+
+const LocationWrapper = styled.div`
+  height: 128px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const LocationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 15px auto;
+  width: 80%;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 6px #00000029;
+`;
+
+const MapIconWrapper = styled.img`
+  width: 13px;
+  height: 18px;
+  margin-left: 5px;
+`;
+
+const TypoContainer = styled.div`
+  width: 60%;
+  padding-left: 15px;
+  font-size: 15px;
+`;
+
+const MaximumContainer = styled.input`
+  width: 50px;
+  height: 24px;
+  margin-right: 10px;
+  font-size: 5px;
+  text-align: center;
+  border: 1px solid black;
+`;
+
+const AddPopUp = (props) => {
+  const [toDo, setToDo] = useState(''); //할 일 저장
+  const [search, setSearch] = useState(''); //장소 검색
+  const [maximum, setMaximum] = useState('');
+  const [isTyped, setIstTyped] = useState(false);
+  const [location, setLocationList] = useState([]); //장소 리스트
+  const [category, setCategory] = useState('Category'); //카테고리 설정
+  const [buttonColor, setButtonColor] = useState('#efc63e'); //카테고리 배경색
+  const [isCategoryName, setIsCategoryName] = useState(true);
+
+  /*category 설정 부분*/
+  const CategoryMenu = () => {
+    if (isCategoryName) {
+      return (
+        <CategoryBtn
+          borderTop="1px solid black"
+          borderLeft="1px solid black"
+          backgroundColor={buttonColor}
+          onClick={ViewMenu}
+        >
+          <option>{category}</option>
+        </CategoryBtn>
+      );
+    } else {
+      return (
+        <CategoryBtn size="6">
+          <Option
+            value="Cafe"
+            backgroundColor="#EF7373"
+            onClick={ToCafe}
+            borderLeft="1px solid black"
+          >
+            Cafe
+          </Option>
+          <Option
+            value="Eat"
+            backgroundColor="#E5B342"
+            onClick={ToEat}
+            marginTop="24px"
+          >
+            Eat
+          </Option>
+          <Option
+            value="Sports"
+            backgroundColor="#EBF061"
+            onClick={ToSport}
+            marginTop="48px"
+          >
+            Sports
+          </Option>
+          <Option
+            value="Hobby"
+            backgroundColor="#6AE5A2"
+            onClick={ToHobby}
+            marginTop="72px"
+          >
+            Hobby
+          </Option>
+          <Option
+            value="Study"
+            backgroundColor="#7594EA"
+            onClick={ToStudy}
+            marginTop="96px"
+          >
+            Study
+          </Option>
+          <Option
+            value="Daily"
+            backgroundColor="#B475EA"
+            onClick={ToDaily}
+            marginTop="120px"
+            borderBottom="1px solid black"
+          >
+            Daily
+          </Option>
+        </CategoryBtn>
+      );
+    }
+  };
+  const ToCafe = () => {
+    setCategory('Cafe');
+    setButtonColor('#EF7373');
+    setIsCategoryName(true);
+  };
+  const ToEat = () => {
+    setCategory('Eat');
+    setButtonColor('#E5B342');
+    setIsCategoryName(true);
+  };
+  const ToSport = () => {
+    setCategory('Sports');
+    setButtonColor('#EBF061');
+    setIsCategoryName(true);
+  };
+  const ToHobby = () => {
+    setCategory('Hobby');
+    setButtonColor('#6AE5A2');
+    setIsCategoryName(true);
+  };
+  const ToStudy = () => {
+    setCategory('Study');
+    setButtonColor('#7594EA');
+    setIsCategoryName(true);
+  };
+  const ToDaily = () => {
+    setCategory('Daily');
+    setButtonColor('#B475EA');
+    setIsCategoryName(true);
+  };
+  const ViewMenu = () => {
+    setIsCategoryName(false);
+  };
+  /*category 설정 부분*/
+
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      friendListApi.getFriendByName(search).then((res) => {
+        setLocationList(res);
+        console.log(res);
+      });
+    }, 300);
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [search]);
+
+  const onChangeToDo = (e) => {
+    setToDo(e.target.value);
   };
 
   const onChangeSearch = (e) => {
+    if (e.target.value !== '') {
+      setIstTyped(true);
+    } else {
+      setIstTyped(false);
+    }
     setSearch(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const onExitClick = () => {
+    props.setIsPopUp(!props.isPopUp);
+  };
+
+  const onSearch = () => {
+    //돋보기버튼 클릭시
+    //api 통신(장소리스트 get? post?)
+  };
+
+  const onChangeMaximum = (e) => {
+    setMaximum(e.target.value);
+  };
+
+  const onSubmit = () => {
+    // axios.post(`apiurl`),
+    //   {
+    //     title: toDo,
+    //     category: category,
+    //     place: search,
+    //     max_count: maximum,
+    //   }.then(() => console.log('성공'));
+    props.setIsPopUp(!props.isPopUp);
   };
 
   return (
     <>
       <Container>
-        <Box margin="10px 10px 10px 295px" paddingtop="2px">
-          <VscClose size="23px" />
+        <Box
+          onClick={onExitClick}
+          margin="10px 10px 10px 295px"
+          paddingtop="3px"
+          borderTop="1px solid black"
+          borderLeft="1px solid black"
+          borderRight="1px solid black"
+          borderBottom="1px solid black"
+        >
+          <AiOutlineClose size="20px" />
         </Box>
         <BtnWrapper>
           <Input
-            onChange={onChangeList}
-            value={list}
+            onChange={onChangeToDo}
+            value={toDo}
+            borderTop="1px solid black"
             type="text"
             placeholder="To do"
           />
-          <CategoryBtn onClick={onClick} ref={dropdownRef}>
-            {' '}
-            <ul>
-              <li>
-                <p>Category</p>
-              </li>
-              <li>
-                <p>카페</p>
-              </li>
-              <li>
-                <p>식사</p>
-              </li>
-              <li>
-                <p>스포츠</p>
-              </li>
-              <li>
-                <p>취미</p>
-              </li>
-              <li>
-                <p>스터디</p>
-              </li>
-              <li>
-                <p>일상</p>
-              </li>
-            </ul>
-          </CategoryBtn>
+          <CategoryMenu />
         </BtnWrapper>
         <BtnWrapper>
-          <Box width="55px" height="37px" paddingtop="8px">
-            <GrSearch size="20px" />
+          <Box
+            width="55px"
+            height="37px"
+            paddingtop="8px"
+            borderTop="1px solid black"
+            borderRight="1px solid black"
+            borderBottom="1px solid black"
+          >
+            <GrSearch onClick={onSearch} size="20px" />
           </Box>
+          {/* 여기서부터 검색창영역 */}
           <Input
             width="282px"
             onChange={onChangeSearch}
             value={search}
+            borderTop="1px solid black"
+            borderBottom="1px solid black"
             type="text"
             placeholder="Place"
           />
         </BtnWrapper>
-        <Button>Add</Button>
+        <LocationWrapper>
+          {isTyped ? (
+            <div>
+              {location.map((location) => (
+                <LocationContainer>
+                  <MapIconWrapper src={map} />
+                  <TypoContainer>{location.name}</TypoContainer>
+                  <MaximumContainer
+                    value={maximum}
+                    type="text"
+                    placeholder="참여인원"
+                    onChange={onChangeMaximum}
+                  />
+                  <StyledButton
+                    onClick={() => setSearch(location.name)}
+                    fontSize="12px"
+                    height="24px"
+                    width="60px"
+                  >
+                    Select
+                  </StyledButton>
+                </LocationContainer>
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
+        </LocationWrapper>
+        {/* 여기까지 검색창영역 */}
+        <StyledButton
+          onClick={onSubmit}
+          height="43px"
+          borderLeft="none"
+          borderRight="none"
+          borderBottom="none"
+        >
+          Add
+        </StyledButton>
       </Container>
     </>
   );
 };
 
 export default AddPopUp;
-
-/*적용해야하는 것: 창 종료버튼 onClick, 카테고리 onClick, Add onClick*/
