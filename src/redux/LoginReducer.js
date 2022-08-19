@@ -8,6 +8,7 @@ const initialState = {
   name: '',
   profile_image: '',
   auth_token: '',
+  isLogin: 'not',
 };
 
 const login = (state = initialState, action) => {
@@ -24,13 +25,17 @@ const login = (state = initialState, action) => {
         id: action.payload.id,
         auth_token: action.payload.auth_token,
         profile_image: action.payload.profile_image,
+        isLogin: 'yes',
       };
     case FAILURE:
       if (state.step > 0) {
         return { ...state, step: state.step - 1 };
       } else return state;
     default:
-      return state;
+      return {
+        ...state,
+        isLogin: 'fail',
+      };
   }
 };
 

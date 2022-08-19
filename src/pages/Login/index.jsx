@@ -55,9 +55,10 @@ const Login = () => {
   const auth = useSelector((state) => state.login);
 
   useEffect(() => {
-    if (auth.auth_token !== '') {
-      onLogin();
+    if (auth.isLogin === 'yes') {
       navigate('/mypage');
+    } else if (auth.isLogin === 'not') {
+      setWarning('로그인에 실패하였습니다');
     }
   }, [auth]);
 

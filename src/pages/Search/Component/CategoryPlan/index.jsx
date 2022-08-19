@@ -31,8 +31,9 @@ const CategoryPlan = (planList) => {
               return (
                 <PlanButton
                   key={plan.id}
-                  place={plan.place}
+                  place={plan.place_name}
                   title={plan.title}
+                  name={plan.name}
                   max_count={plan.max_count}
                   count={plan.count}
                   reward={plan.reward}

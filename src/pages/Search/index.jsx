@@ -36,6 +36,8 @@ const CategoryBtn = styled.select`
 `;
 
 const SelectWrapper = styled.div`
+  z-index: 5;
+  top: 70px;
   margin-top: 0.78125rem;
   display: flex;
   flex-direction: row-reverse;
@@ -202,36 +204,43 @@ const Search = () => {
 
   //돋보기 버튼을 눌렸을 때 등록 부분
   const onSubmit = () => {
-    console.log(searchValue);
+    friendListApi
+      .getFriendByName(searchValue)
+      .then((res) => setFriendList(res));
     //api 통신 부분
   };
+  const ToCategory = () => {
+    setCategory('Category');
+    setButtonColor('#efc63e');
+    setIsCategoryName(true);
+  };
   const ToCafe = () => {
-    setCategory('Cafe');
+    setCategory('카페');
     setButtonColor('#EF7373');
     setIsCategoryName(true);
   };
   const ToEat = () => {
-    setCategory('Eat');
+    setCategory('식사');
     setButtonColor('#E5B342');
     setIsCategoryName(true);
   };
   const ToSport = () => {
-    setCategory('Sports');
+    setCategory('스포츠');
     setButtonColor('#EBF061');
     setIsCategoryName(true);
   };
   const ToHobby = () => {
-    setCategory('Hobby');
+    setCategory('취미');
     setButtonColor('#6AE5A2');
     setIsCategoryName(true);
   };
   const ToStudy = () => {
-    setCategory('Study');
+    setCategory('스터디');
     setButtonColor('#7594EA');
     setIsCategoryName(true);
   };
   const ToDaily = () => {
-    setCategory('Daily');
+    setCategory('일상');
     setButtonColor('#B475EA');
     setIsCategoryName(true);
   };
@@ -266,13 +275,19 @@ const Search = () => {
             <SelectWrapper>
               <CategoryMenu />
             </SelectWrapper>
-            {planList.map((plan) => (
-              <>
-                <CategoryWrapper># {plan.category}</CategoryWrapper>
-                <CategoryPlan planList={plan.plan_list} />
-              </>
-            ))}
-            <Nav>s</Nav>
+            {planList
+              .filter(
+                (cate) =>
+                  cate.category.includes(category) ||
+                  category.includes('Category')
+              )
+              .map((plan) => (
+                <>
+                  <CategoryWrapper># {plan.category}</CategoryWrapper>
+                  <CategoryPlan planList={plan.plan_list} />
+                </>
+              ))}
+            <Nav />
           </>
         )}
       </Wrapper>

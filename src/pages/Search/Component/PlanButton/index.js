@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import groupIconForCategory from '../../../../assets/img/groupIconForCategory.png';
 import mapIconForCategory from '../../../../assets/img/mapIconForCategory.png';
 import rewardIconForCategory from '../../../../assets/img/rewardIconForCategory.png';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import toast from 'react-simple-toasts';
+
+const options = {
+  time: 3000,
+};
 
 const Wrapper = styled.div`
   padding-top: 1.09188rem;
@@ -105,9 +112,18 @@ const TitleInfoWrapper = styled.div`
 `;
 
 const PlanButton = (props) => {
+  const auth = useSelector((state) => state.login);
   const navigate = useNavigate();
   const onClickPlan = () => {
-    // axios.post('/fiend/create/plan').then(navigate(`/friend/my-page`));
+    axios
+      .post('/friend/create', {
+        id: auth.id,
+        plan_id: props.id,
+      })
+      .then(() => {
+        toast('약속 추가가 완료되었습니다', ...options);
+        navigate(`/friend/my-page`);
+      });
   };
 
   return (
