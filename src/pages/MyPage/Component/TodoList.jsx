@@ -16,6 +16,7 @@ import { setCookies } from './../../Login/index';
 import { TextBox } from '../../../musterd-ui/LoginSignupStyled';
 import Modal from '../../../musterd-ui/Modal';
 import NavigationBar from '../../../musterd-ui/NavigationBar';
+import Header from '../../../musterd-ui/Header';
 
 // 전체 컨테이너
 const Container = styled.div`
@@ -36,40 +37,6 @@ const Container = styled.div`
 `;
 
 // *******************************************TopBar***********************************************
-
-//  Musterd 글씨와 프사 있는 TopBar
-const TopBar = styled.div`
-  height: 49px;
-  display: flex;
-`;
-
-// Musterd 텍스트
-const MusterdText = styled.div`
-  width: 58px;
-  height: 20px;
-
-  font-size: 15px;
-
-  margin: 14px 239px 15px 25px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-// 프사
-const ProfilePic = styled.div`
-  width: 29px;
-  height: 29px;
-  border: 1.1px solid black;
-  border-radius: 50%;
-
-  margin-right: 24px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  background-color: #3993cb;
-`;
 
 // ******************************************Calendar***********************************************
 
@@ -455,12 +422,7 @@ const TodoList = () => {
   const [modify, setModify] = useState(false); // 편집 기능
   const [addPopup, setAddPopup] = useState(false);
   const [placePopup, setPlacePopup] = useState(false);
-  const [profilePopup, setProfilePopup] = useState(false); //모달 적용
-
-  //프로필 누를때 팝업
-  const onClickProfile = () => {
-    setProfilePopup(!profilePopup);
-  };
+  //모달 적용
 
   // ToDo 를 클릭하면 true 값으로 바뀜.
   const onClickIsToDo = (e) => {
@@ -530,22 +492,8 @@ const TodoList = () => {
       ) : (
         <></>
       )}
-      {profilePopup ? (
-        <Modal
-          profileModal={profilePopup}
-          setProfileModal={setProfilePopup}
-          type="myprofilePopUp"
-        />
-      ) : (
-        <></>
-      )}
+      <Header />
       <Container>
-        {/* TopBar */}
-        <TopBar>
-          <MusterdText>Musterd</MusterdText>
-          <ProfilePic onClick={onClickProfile} />
-        </TopBar>
-        <hr className="tophr"></hr>
         {/* 캘린더 버튼 */}
 
         {/* 날짜 */}
@@ -554,9 +502,9 @@ const TodoList = () => {
         <DoneContainer>
           <ButtonWrapper onClick={onClickIsToDo}>
             {clickToDo ? (
-              <YellowButton>ToDo</YellowButton>
+              <YellowButton>To Do</YellowButton>
             ) : (
-              <WhiteButton>ToDo</WhiteButton>
+              <WhiteButton>To Do</WhiteButton>
             )}
           </ButtonWrapper>
           <ButtonWrapper onClick={onClickIsDone}>
