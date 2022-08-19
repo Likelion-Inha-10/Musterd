@@ -104,7 +104,7 @@ const BeforeScan = () => {
           <Underline width="284px" />
 
           <Text fontSize="17px">
-            중앙해커톤에서 “인하대학교 000팀”을 <br /> 찾아보시고 카메라를 통해
+            중앙해커톤에서 “인하대학교 주당팀”을 <br /> 찾아보시고 카메라를 통해
             QR을 찍어보세요!
           </Text>
         </TextWrapper>

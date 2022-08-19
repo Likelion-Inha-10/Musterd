@@ -10,7 +10,6 @@ import Stamp from '../pages/Stamp';
 import LikeLion from '../pages/Stamp/Component/StampPage/LikeLion';
 import Harvardcomplete from '../pages/Stamp/Component/Performance/harvardcomplete';
 import StampPopUp from '../musterd-ui/PopUpStyled/StampPopUp';
-import AddPopUp from '../musterd-ui/PopUpStyled/AddPopUp';
 import InhaUni from '../pages/Stamp/Component/StampPage/InhaUni';
 
 // 라우트명은 kebab-case 로 작성합니다

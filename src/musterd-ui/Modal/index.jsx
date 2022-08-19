@@ -8,13 +8,14 @@ import PlacePopUp from './../PopUpStyled/PlacePopUp';
 import StampPopUp from './../PopUpStyled/StampPopUp';
 
 const Overlay = styled.div`
-  position: relative;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
+  width: 24.5%;
   height: 100%;
-  z-index: 1;
+  z-index: 10000;
 `;
 const Wrapper = styled.div`
+  position: absolute;
   height: 100%;
   width: 100%;
   display: flex;

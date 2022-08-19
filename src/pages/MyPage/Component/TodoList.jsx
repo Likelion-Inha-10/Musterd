@@ -503,138 +503,166 @@ const TodoList = () => {
   };
 
   // 채워진 체크박스 눌렀을 때 미완료로 넘어감
-  const onClcikFilledBox = (e) => {
+  const onClickFilledBox = (e) => {
     console.log('미완료');
   };
 
   return (
-    <Container>
-      {/* TopBar */}
-      <TopBar>
-        <MusterdText>Musterd</MusterdText>
-        <ProfilePic />
-      </TopBar>
-      <hr className="tophr"></hr>
-      {/* 캘린더 버튼 */}
-
-      {/* 날짜 */}
-      <TimeBar />
-      {/* ToDo & Done 버튼 */}
-      <DoneContainer>
-        <ButtonWrapper onClick={onClickIsToDo}>
-          {clickToDo ? (
-            <YellowButton>ToDo</YellowButton>
-          ) : (
-            <WhiteButton>ToDo</WhiteButton>
-          )}
-        </ButtonWrapper>
-        <ButtonWrapper onClick={onClickIsDone}>
-          {!clickToDo ? (
-            <YellowButton>Done</YellowButton>
-          ) : (
-            <WhiteButton>Done</WhiteButton>
-          )}
-        </ButtonWrapper>
-      </DoneContainer>
-      {/* 플러스 마이너스 버튼  */}
-      <PlusMinusContainer>
-        {/* 플러스 버튼 */}
-        <BsPlusSquare
-          style={{
-            backgroundColor: '#F3C93F',
-            marginLeft: '268px',
-            marginRight: '33px',
-          }}
-          size="24"
+    <>
+      {addPopup ? (
+        <Modal addModal={addPopup} setAddModal={setAddPopup} type="addPopUp" />
+      ) : (
+        <></>
+      )}
+      {placePopup ? (
+        <Modal
+          placeModal={placePopup}
+          setPlaceModal={setPlacePopup}
+          type="placePopUp"
         />
-        {/* 마이너스 버튼 */}
-        {/* 마이너스 버튼을 누르면 완료버튼으로 바뀜 */}
-        {modify ? (
-          <BsCheckCircle
-            style={{ marginRight: '26px' }}
-            size="24"
-            onClick={onClickModify}
-          />
-        ) : (
-          <BsDashSquare
-            style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
-            size="24"
-            onClick={onClickModify}
-          />
-        )}
-      </PlusMinusContainer>
+      ) : (
+        <></>
+      )}
+      {profilePopup ? (
+        <Modal
+          profileModal={profilePopup}
+          setProfileModal={setProfilePopup}
+          type="myprofilePopUp"
+        />
+      ) : (
+        <></>
+      )}
+      <Container>
+        {/* TopBar */}
+        <TopBar>
+          <MusterdText>Musterd</MusterdText>
+          <ProfilePic onClick={onClickProfile} />
+        </TopBar>
+        <hr className="tophr"></hr>
+        {/* 캘린더 버튼 */}
 
-      {/* 플랜 파트 */}
-      <MainContainer>
-        {clickToDo
-          ? plans.map((plan) => (
-              <>
-                {!plan.isDone && (
-                  <PlanContainer key={plan.id}>
-                    {/* 편집 기능을 눌렀다면 동그란 마이너스 아니면 빈 박스 */}
-                    {modify ? (
-                      <BsDashCircle
-                        size="24"
-                        color="#3993CB"
-                        style={{ marginRight: '18px' }}
-                        onClick={onClickDelete}
-                      />
-                    ) : (
-                      <EmptyCheckBox onClick={onClickEmptyBox} />
-                    )}
-                    <PlanBox>
-                      <PlanTimeContainer>
-                        <PlanTime>
-                          {Math.floor(plan.promise_time / 100)}
-                        </PlanTime>
-                        <p>:</p>
-                        <PlanTime>{plan.promise_time % 100}</PlanTime>
-                      </PlanTimeContainer>
-                      <PlanBody>{plan.title}</PlanBody>
-                      {plan.is_mine ? (
-                        <PlaceButton>Place</PlaceButton>
+        {/* 날짜 */}
+        <TimeBar />
+        {/* ToDo & Done 버튼 */}
+        <DoneContainer>
+          <ButtonWrapper onClick={onClickIsToDo}>
+            {clickToDo ? (
+              <YellowButton>ToDo</YellowButton>
+            ) : (
+              <WhiteButton>ToDo</WhiteButton>
+            )}
+          </ButtonWrapper>
+          <ButtonWrapper onClick={onClickIsDone}>
+            {!clickToDo ? (
+              <YellowButton>Done</YellowButton>
+            ) : (
+              <WhiteButton>Done</WhiteButton>
+            )}
+          </ButtonWrapper>
+        </DoneContainer>
+        {/* 플러스 마이너스 버튼  */}
+        <PlusMinusContainer>
+          {/* 플러스 버튼 */}
+          <BsPlusSquare
+            style={{
+              backgroundColor: '#F3C93F',
+              marginLeft: '268px',
+              marginRight: '33px',
+            }}
+            size="24"
+            onClick={onClickPlus}
+          />
+          {/* 마이너스 버튼 */}
+          {/* 마이너스 버튼을 누르면 완료버튼으로 바뀜 */}
+          {modify ? (
+            <BsCheckCircle
+              style={{ marginRight: '26px' }}
+              size="24"
+              onClick={onClickModify}
+            />
+          ) : (
+            <BsDashSquare
+              style={{ backgroundColor: ' #F3C93F', marginRight: '26px' }}
+              size="24"
+              onClick={onClickModify}
+            />
+          )}
+        </PlusMinusContainer>
+
+        {/* 플랜 파트 */}
+        <MainContainer>
+          {clickToDo
+            ? plans.map((plan) => (
+                <>
+                  {!plan.isDone && (
+                    <PlanContainer key={plan.id}>
+                      {/* 편집 기능을 눌렀다면 동그란 마이너스 아니면 빈 박스 */}
+                      {modify ? (
+                        <BsDashCircle
+                          size="24"
+                          color="#3993CB"
+                          style={{ marginRight: '18px' }}
+                          onClick={onClickDelete}
+                        />
                       ) : (
-                        <FriendPlaceButton>Place</FriendPlaceButton>
+                        <EmptyCheckBox onClick={onClickEmptyBox} />
                       )}
-                    </PlanBox>
-                  </PlanContainer>
-                )}
-              </>
-            ))
-          : plans.map((plan) => (
-              <>
-                {plan.isDone && (
-                  <PlanContainer key={plan.id}>
-                    {modify ? (
-                      <BsDashCircle
-                        size="24"
-                        color="#3993CB"
-                        style={{ marginRight: '18px' }}
-                        onClick={onClickDelete}
-                      />
-                    ) : (
-                      <FilledCheckBox onClick={onClcikFilledBox} />
-                    )}
-                    <PlanBox>
-                      <PlanTimeContainer>
-                        <PlanTime>
-                          {Math.floor(plan.promise_time / 100)}
-                        </PlanTime>
-                        <PlanTime>{plan.promise_time % 100}</PlanTime>
-                      </PlanTimeContainer>
-                      <PlanBody>{plan.title}</PlanBody>
-                      {plan.is_mine ? (
-                        <PlaceButton>Place</PlaceButton>
+                      <PlanBox>
+                        <PlanTimeContainer>
+                          <PlanTime>
+                            {Math.floor(plan.promise_time / 100)}
+                          </PlanTime>
+                          <p>:</p>
+                          <PlanTime>{plan.promise_time % 100}</PlanTime>
+                        </PlanTimeContainer>
+                        <PlanBody>{plan.title}</PlanBody>
+                        {plan.is_mine ? (
+                          <PlaceButton onClick={onClickPlace}>
+                            Place
+                          </PlaceButton>
+                        ) : (
+                          <FriendPlaceButton>Place</FriendPlaceButton>
+                        )}
+                      </PlanBox>
+                    </PlanContainer>
+                  )}
+                </>
+              ))
+            : plans.map((plan) => (
+                <>
+                  {plan.isDone && (
+                    <PlanContainer key={plan.id}>
+                      {modify ? (
+                        <BsDashCircle
+                          size="24"
+                          color="#3993CB"
+                          style={{ marginRight: '18px' }}
+                          onClick={onClickDelete}
+                        />
                       ) : (
-                        <FriendPlaceButton>Place</FriendPlaceButton>
+                        <FilledCheckBox onClick={onClickFilledBox} />
                       )}
-                    </PlanBox>
-                  </PlanContainer>
-                )}
-              </>
-            ))}
-      </MainContainer>
-    </Container>
+                      <PlanBox>
+                        <PlanTimeContainer>
+                          <PlanTime>
+                            {Math.floor(plan.promise_time / 100)}
+                          </PlanTime>
+                          <PlanTime>{plan.promise_time % 100}</PlanTime>
+                        </PlanTimeContainer>
+                        <PlanBody>{plan.title}</PlanBody>
+                        {plan.is_mine ? (
+                          <PlaceButton>Place</PlaceButton>
+                        ) : (
+                          <FriendPlaceButton>Place</FriendPlaceButton>
+                        )}
+                      </PlanBox>
+                    </PlanContainer>
+                  )}
+                </>
+              ))}
+        </MainContainer>
+      </Container>
+    </>
   );
 };
 
