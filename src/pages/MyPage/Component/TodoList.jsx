@@ -15,6 +15,7 @@ import * as planApi from '../../../apis/planApi';
 import { setCookies } from './../../Login/index';
 import { TextBox } from '../../../musterd-ui/LoginSignupStyled';
 import Modal from '../../../musterd-ui/Modal';
+import NavigationBar from '../../../musterd-ui/NavigationBar';
 
 // 전체 컨테이너
 const Container = styled.div`
@@ -111,6 +112,8 @@ const NowYear = styled.div`
   margin-left: 50px;
   float: left;
   margin-top: 16px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
 `;
 
 // 날짜
@@ -120,6 +123,8 @@ const NowDate = styled.div`
   margin-right: 20px;
   text-align: center;
   display: inline;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
 `;
 
 // 요일
@@ -130,6 +135,8 @@ const DayWeek = styled.div`
   float: right;
   margin-right: 20px;
   margin-top: 16px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
 `;
 const TimeBar = () => {
   let now = new Date(); // 현재 날짜 및 시간
@@ -662,6 +669,7 @@ const TodoList = () => {
               ))}
         </MainContainer>
       </Container>
+      <NavigationBar pageNumber="1" />
     </>
   );
 };

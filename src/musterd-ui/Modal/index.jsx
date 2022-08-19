@@ -10,7 +10,7 @@ import StampPopUp from './../PopUpStyled/StampPopUp';
 const Overlay = styled.div`
   position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 24.5%;
+  width: 100%;
   height: 100%;
   z-index: 10000;
 `;
